@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="position-absolute top-50 start-50 translate-middle bg-info p-5 border border-dark-subtle shadow-sm p-3 mb-5 rounded">
+    <form action="/auth/login" method="POST" class="form-group ">
+        <h1 class="text-dark">Login</h1>
+        <hr>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="user" placeholder="user" name="user">
+            <label for="user">Usuário</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+            <label for="password">Senha</label>
+        </div>
+        <hr>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block btn-dark btn-lg">Login</button>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-block btn-dark btn-lg">Registrar-se</a>
+        </div>
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,6 @@
+INICIAR O BANCO DE DADOS:
+http://127.0.0.1:5000/create_db
+
+INICIAR O APP:
+flask --app app --debug run
+flask --app app run
