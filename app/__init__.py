@@ -39,6 +39,24 @@ class users(UserMixin, db.Model):
         self.dt_create = dt_create
         self.situacao = situacao
 
+class pedidos(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name_client = db.Column(db.String(100))
+    items = db.Column(db.String(100))
+    address = db.Column(db.String(100))
+    tel = db.Column(db.String(200))
+    order_time = db.Column(db.DATETIME)
+    situacao = db.Column(db.String(1))
+    
+    def __init__(self, name_client, items, address, tel, order_time, situacao):
+        self.name_client = name_client
+        self.items = items
+        self.address = address
+        self.tel = tel
+        self.order_time = order_time
+        self.situacao = situacao
+
+
 # CRIA OS ROTEAMENTOS
 from . import index
 app.register_blueprint(index.bp)

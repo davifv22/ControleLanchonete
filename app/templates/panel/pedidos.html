@@ -1,7 +1,47 @@
 {% extends 'panel/home.html' %}
 {% block panel %}
-
-<h1>PEDIDOS</h1>
+<br>
+<h3 style="text-align: center;">PEDIDOS</h3>
 <hr>
+<div class="panel-order">
+    {% for pedido in all_pedidos %}
+    <div class="card m-1" style="width: 19rem; height: 17rem;">
+        <div class="card-header text-bg-dark overflow-y-auto" style="height: 15rem;">
+            <h5 class="card-title">{{ pedido.name_client }}</h5>
+            <h6 class="card-subtitle">Pedido #{{pedido.id}}</h6>
+            <hr>
+            <p class="card-text">Itens: {{ pedido.items }}</p>
+        </div>
+        <div class="d-flex justify-content-center text-bg-dark p-1 rounded-bottom">
+            <button class="btn btn-primary btn-sm m-1" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#{{pedido.id}}" aria-controls="offcanvasBottom">Detalhes</button>
+            <a href="#" class="btn btn-danger btn-sm m-1">Cancelar</a>
+            <a href="#" class="btn btn-success btn-sm m-1">Finalizar</a> <!-- ou iniciar -->
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+{% for pedido in all_pedidos %}
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="{{pedido.id}}" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomLabel">PEDIDO #{{pedido.id}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small">
+        Nome cliente: {{ pedido.name_client }} <br>
+        Itens: {{ pedido.items }} <br>
+        Endereço: {{ pedido.address }} <br>
+        Telefone: {{ pedido.tel }} <br>
+        Data: {{ pedido.order_time }} <br>
+        Situação: EM ABERTO <br>
+    </div>
+</div>
+
+{% endfor %}
 
 {% endblock %}

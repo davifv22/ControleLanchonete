@@ -16,10 +16,13 @@ def home():
 
 @bp.route('/pedidos', methods=['POST', 'GET'])
 @login_required
-def pedidos():
+def pedidos_():
     if request.method == 'POST':
         pass
     name_company = "Nome empresa"
     date = datetime.now().strftime('Data: %d/%m/%Y')
     user = current_user.name
-    return render_template('panel/pedidos.html', name_company=name_company, date=date, user=user)
+    
+    all_pedidos = pedidos.query.filter_by(situacao='A').all()
+    
+    return render_template('panel/pedidos.html', name_company=name_company, date=date, user=user, all_pedidos=all_pedidos)
