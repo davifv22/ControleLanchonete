@@ -1,3 +1,4 @@
+/********************* ESTILOS DA PAGINA HOME *********************/
 .panel-statement {
     display: flex;
     flex-direction: row;
@@ -5,10 +6,86 @@
     align-items: center;
 }
 
+/********************* ESTILOS DA PAGINA PEDIDOS *********************/
 .panel-order {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+}
+
+
+/* CUPOM FISCAL  */
+.text-center {
+    text-align: center;
+}
+
+.ttu {
+    text-transform: uppercase;
+}
+
+.ttu .situacao {
+    color: rgb(255, 255, 255);
+    padding: 2px; 
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgb(0, 0, 0);
+}
+.printer-ticket {
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgb(255, 255, 120);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0);
+    display: table !important;
+    width: 100%;
+    max-width: 290px;
+    font-weight: light;
+    line-height: 1.3em;
+}
+
+.printer-ticket,
+.printer-ticket * {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+}
+
+.printer-ticket th:nth-child(2),
+.printer-ticket td:nth-child(2) {
+    width: 50px;
+}
+
+.printer-ticket th:nth-child(3),
+.printer-ticket td:nth-child(3) {
+    width: 90px;
+    text-align: right;
+}
+
+.printer-ticket th {
+    font-weight: inherit;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px dashed rgb(0, 0, 0);
+}
+
+.printer-ticket tbody tr:last-child td {
+    padding-bottom: 10px;
+}
+
+.printer-ticket tfoot .sup td {
+    padding: 10px 0;
+    border-top: 1px dashed rgb(0, 0, 0);
+}
+
+.printer-ticket tfoot .sup.p--0 td {
+    padding-bottom: 0;
+}
+
+.printer-ticket .top td {
+    padding-top: 10px;
+}
+
+.printer-ticket .last td {
+    padding-bottom: 10px;
 }

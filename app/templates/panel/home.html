@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+<title>{{ name_company }}</title>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -13,21 +14,21 @@
                         <a class="nav-link" href="{{url_for('panel.pedidos_')}}">Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Cardápio</a>
+                        <a class="nav-link" href="{{url_for('panel.cardapio')}}">Cardápio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">Empresa</a></li>
-                            <li><a class="dropdown-item" href="">Usuários</a></li>
-                            <li><a class="dropdown-item" href="">Cardápio</a></li>
-                            <li><a class="dropdown-item" href="">Fornecedores</a>
+                            <li><a class="dropdown-item" href="{{url_for('cad.empresa')}}">Empresa</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('cad.usuarios')}}">Usuários</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('cad.cardapio')}}">Cardápio</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('cad.fornecedores')}}">Fornecedores</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="">Parametrização</a>
+                            <li><a class="dropdown-item" href="{{url_for('cad.config')}}">Parametrização</a>
                             </li>
                         </ul>
                     </li>

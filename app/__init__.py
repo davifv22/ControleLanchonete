@@ -29,15 +29,15 @@ class users(UserMixin, db.Model):
     email = db.Column(db.String(100))
     password = db.Column(db.String(200))
     dt_create = db.Column(db.DATETIME)
-    situacao = db.Column(db.String(1))
+    situation = db.Column(db.String(1))
     
-    def __init__(self, user, name, email, password, dt_create, situacao):
+    def __init__(self, user, name, email, password, dt_create, situation):
         self.user = user
         self.name = name
         self.email = email
         self.password = password
         self.dt_create = dt_create
-        self.situacao = situacao
+        self.situation = situation
 
 class pedidos(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -46,15 +46,15 @@ class pedidos(UserMixin, db.Model):
     address = db.Column(db.String(100))
     tel = db.Column(db.String(200))
     order_time = db.Column(db.DATETIME)
-    situacao = db.Column(db.String(1))
+    situation = db.Column(db.String(1))
     
-    def __init__(self, name_client, items, address, tel, order_time, situacao):
+    def __init__(self, name_client, items, address, tel, order_time, situation):
         self.name_client = name_client
         self.items = items
         self.address = address
         self.tel = tel
         self.order_time = order_time
-        self.situacao = situacao
+        self.situacao = situation
 
 
 # CRIA OS ROTEAMENTOS
@@ -67,3 +67,6 @@ app.register_blueprint(auth.bp)
 
 from . import panel
 app.register_blueprint(panel.bp)
+
+from . import cad
+app.register_blueprint(cad.bp)

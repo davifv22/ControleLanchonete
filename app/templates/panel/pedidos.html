@@ -5,43 +5,65 @@
 <hr>
 <div class="panel-order">
     {% for pedido in all_pedidos %}
-    <div class="card m-1" style="width: 19rem; height: 17rem;">
-        <div class="card-header text-bg-dark overflow-y-auto" style="height: 15rem;">
-            <h5 class="card-title">{{ pedido.name_client }}</h5>
-            <h6 class="card-subtitle">Pedido #{{pedido.id}}</h6>
-            <hr>
-            <p class="card-text">Itens: {{ pedido.items }}</p>
-        </div>
-        <div class="d-flex justify-content-center text-bg-dark p-1 rounded-bottom">
-            <button class="btn btn-primary btn-sm m-1" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#{{pedido.id}}" aria-controls="offcanvasBottom">Detalhes</button>
-            <a href="#" class="btn btn-danger btn-sm m-1">Cancelar</a>
-            <a href="#" class="btn btn-success btn-sm m-1">Finalizar</a> <!-- ou iniciar -->
-        </div>
-    </div>
+    <table class="printer-ticket m-2">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <b>Cliente: {{ pedido.name_client }}</b> <br>
+                    Tel: {{ pedido.tel }} <br>
+                    <b>Pedido: #{{ pedido.id }}</b> <br>
+                    Data: {{ pedido.order_time }}
+                </th>
+            </tr>
+            <tr>
+                <th class="ttu" colspan="3">
+                    <b class="situacao bg-success">Em aberto</b>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="top">
+                <td colspan="3">Endereço: {{ pedido.address }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">Pagamento:</td>
+            </tr>
+            <tr>
+                <td>Total itens:</td>
+                <td>5.0</td>
+                <td>R$ 55,00</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="sup ttu p--0">
+                <td colspan="3">
+                    <b>Totais</b>
+                </td>
+            </tr>
+            <tr class="ttu">
+                <td colspan="2">Sub-total</td>
+                <td align="right">R$43,60</td>
+            </tr>
+            <tr class="ttu">
+                <td colspan="2">Entrega</td>
+                <td align="right">R$4,60</td>
+            </tr>
+            <tr class="ttu">
+                <td colspan="2">Total</td>
+                <td align="right">R$45,56</td>
+            </tr>
+            <tr class="sup">
+                <td colspan="3" align="center">
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-success btn-sm m-1">Preparar</a> <!-- ou finalizar -->
+                        <button type="button" class="btn btn-primary btn-sm m-1" data-bs-toggle="modal"
+                            data-bs-target="#{{ pedido.id }}">Detalhes</button>
+                        <a href="#" class="btn btn-danger btn-sm m-1">Cancelar</a>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
     {% endfor %}
 </div>
-
-
-
-
-
-{% for pedido in all_pedidos %}
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="{{pedido.id}}" aria-labelledby="offcanvasBottomLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomLabel">PEDIDO #{{pedido.id}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body small">
-        Nome cliente: {{ pedido.name_client }} <br>
-        Itens: {{ pedido.items }} <br>
-        Endereço: {{ pedido.address }} <br>
-        Telefone: {{ pedido.tel }} <br>
-        Data: {{ pedido.order_time }} <br>
-        Situação: EM ABERTO <br>
-    </div>
-</div>
-
-{% endfor %}
-
 {% endblock %}

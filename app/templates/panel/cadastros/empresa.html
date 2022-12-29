@@ -1,0 +1,50 @@
+{% extends 'panel/home.html' %}
+{% block panel %}
+<br>
+<h3 style="text-align: center;">CADASTRO DA EMPRESA</h3>
+<hr>
+<form class="row g-3">
+    <div class="col-md-6">
+        <label for="name_company" class="form-label">Nome empresa</label>
+        <input type="text" class="form-control" id="name_company" name="name_company" required>
+    </div>
+    <div class="col-md-6">
+        <label for="corporate_name" class="form-label">Razão social</label>
+        <input type="text" class="form-control" id="corporate_name" name="corporate_name" required>
+    </div>
+    <div class="col-12">
+        <label for="endereco" class="form-label">Endereço</label>
+        <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Rua tal, 00" required>
+    </div>
+    <div class="col-12">
+        <label for="bairro" class="form-label">Bairro</label>
+        <input type="text" class="form-control" id="bairro" required>
+    </div>
+    <div class="col-md-6">
+        <label for="cidade" class="form-label">Cidade</label>
+        <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="col-md-4">
+        <label for="inputState" class="form-label">State</label>
+        <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label for="inputZip" class="form-label">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+                Check me out
+            </label>
+        </div>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+</form>
+{% endblock %}

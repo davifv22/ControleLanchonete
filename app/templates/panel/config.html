@@ -1,0 +1,89 @@
+{% extends 'panel/home.html' %}
+{% block panel %}
+<br>
+<h3 style="text-align: center;">PARAMETRIZAÇÃO</h3>
+<hr>
+<div class="d-flex align-items-start">
+    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
+            type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Config.I</button>
+        <!-- <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+            type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Config. 2</button>
+        <button class="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled"
+            type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">Config. 3</button>
+        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages"
+            type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Config. 4</button>
+        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
+            type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Config. 5</button> -->
+    </div>
+
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+            tabindex="0">
+
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="name_company" class="form-label">Nome empresa</label>
+                    <input type="text" class="form-control" id="name_company" name="name_company" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="corporate_name" class="form-label">Razão social</label>
+                    <input type="text" class="form-control" id="corporate_name" name="corporate_name" required>
+                </div>
+                <div class="col-12">
+                    <label for="endereco" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Rua tal, 00" required>
+                </div>
+                <div class="col-12">
+                    <label for="bairro" class="form-label">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="cidade" class="form-label">Cidade</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <select id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="inputZip">
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Check me out
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </form>
+
+
+        </div>
+
+
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+            tabindex="0">...</div>
+
+
+        <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab"
+            tabindex="0">...</div>
+
+
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"
+            tabindex="0">...</div>
+
+
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+            tabindex="0">...</div>
+    </div>
+</div>
+{% endblock %}
