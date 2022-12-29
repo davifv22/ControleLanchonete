@@ -22,7 +22,7 @@ def pedidos_():
     name_company = "Nome empresa"
     date = datetime.now().strftime('Data: %d/%m/%Y')
     user = current_user.name
-    all_pedidos = pedidos.query.filter_by(situation='A').all()
+    all_pedidos = pedidos.query.filter(pedidos.situation != 'FINALIZADO').all()
     return render_template('panel/pedidos.html', name_company=name_company, date=date, user=user, all_pedidos=all_pedidos)
 
 

@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, redirect, render_template, request, flash
+from flask import Flask, Blueprint, redirect, render_template, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from datetime import datetime
@@ -29,7 +29,7 @@ class users(UserMixin, db.Model):
     email = db.Column(db.String(100))
     password = db.Column(db.String(200))
     dt_create = db.Column(db.DATETIME)
-    situation = db.Column(db.String(1))
+    situation = db.Column(db.String(50))
     
     def __init__(self, user, name, email, password, dt_create, situation):
         self.user = user
@@ -46,7 +46,7 @@ class pedidos(UserMixin, db.Model):
     address = db.Column(db.String(100))
     tel = db.Column(db.String(200))
     order_time = db.Column(db.DATETIME)
-    situation = db.Column(db.String(1))
+    situation = db.Column(db.String(50))
     
     def __init__(self, name_client, items, address, tel, order_time, situation):
         self.name_client = name_client
@@ -54,7 +54,7 @@ class pedidos(UserMixin, db.Model):
         self.address = address
         self.tel = tel
         self.order_time = order_time
-        self.situacao = situation
+        self.situation = situation
 
 
 # CRIA OS ROTEAMENTOS

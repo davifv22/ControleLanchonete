@@ -3,7 +3,7 @@
 <br>
 <h3 style="text-align: center;">PEDIDOS</h3>
 <hr>
-<div class="panel-order">
+<div class="d-flex justify-content-around flex-wrap">
     {% for pedido in all_pedidos %}
     <table class="printer-ticket m-2">
         <thead>
@@ -17,7 +17,13 @@
             </tr>
             <tr>
                 <th class="ttu" colspan="3">
-                    <b class="situacao bg-success">Em aberto</b>
+                    {% if pedido.situation == 'PENDENTE' %}
+                    <b class="situacao bg-danger">PENDENTE</b>
+                    {% elif pedido.situation == 'EM ANDAMENTO' %}
+                    <b class="situacao bg-success">EM ANDAMENTO</b>
+                    {% elif pedido.situation == 'NA ENTREGA' %}
+                    <b class="situacao bg-secondary">NA ENTREGA</b>
+                    {% endif %}
                 </th>
             </tr>
         </thead>
@@ -55,7 +61,13 @@
             <tr class="sup">
                 <td colspan="3" align="center">
                     <div class="d-flex justify-content-center">
-                        <a href="#" class="btn btn-success btn-sm m-1">Preparar</a> <!-- ou finalizar -->
+                        {% if pedido.situation == 'PENDENTE' %}
+                        <a href="#" class="btn btn-success btn-sm m-1">Preparar</a>
+                        {% elif pedido.situation == 'EM ANDAMENTO' %}
+                        <a href="#" class="btn btn-success btn-sm m-1">Finalizar</a>
+                        {% elif pedido.situation == 'NA ENTREGA' %}
+                        <a href="#" class="btn btn-success btn-sm m-1">Finalizar</a>
+                        {% endif %}
                         <button type="button" class="btn btn-primary btn-sm m-1" data-bs-toggle="modal"
                             data-bs-target="#{{ pedido.id }}">Detalhes</button>
                         <a href="#" class="btn btn-danger btn-sm m-1">Cancelar</a>

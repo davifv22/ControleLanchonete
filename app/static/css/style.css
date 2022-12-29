@@ -1,21 +1,6 @@
 /********************* ESTILOS DA PAGINA HOME *********************/
-.panel-statement {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
 
 /********************* ESTILOS DA PAGINA PEDIDOS *********************/
-.panel-order {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-
 /* CUPOM FISCAL  */
 .text-center {
     text-align: center;
@@ -27,22 +12,28 @@
 
 .ttu .situacao {
     color: rgb(255, 255, 255);
-    padding: 2px; 
+    padding: 2px;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
+
 .printer-ticket {
-    padding: 10px;
+    padding: 5px;
     margin-left: auto;
     margin-right: auto;
     background: rgb(255, 255, 120);
     box-shadow: 1px 1px 5px rgba(0, 0, 0);
     display: table !important;
     width: 100%;
-    max-width: 290px;
+    max-width: 250px;
     font-weight: light;
     line-height: 1.3em;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: rgb(0, 0, 0);
 }
 
 .printer-ticket,
