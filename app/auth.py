@@ -8,7 +8,7 @@ def login():
         user = request.form['user']
         password = request.form['password']
         user_ = users.query.filter_by(user=user).first()
-        print(user_)
+
         if user_ is None:
             #criar mensagem que usur nao existe
             return redirect('/auth/login')

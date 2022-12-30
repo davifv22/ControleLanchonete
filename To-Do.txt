@@ -1,0 +1,5 @@
+- Criar documentação das páginas e funções da API;
+- Criar documentação para o banco de dados;
+- Ajustar detalhes página "Pedidos" e "Cardápio";
+- Criar páginas de cadastros;
+- Criar index para clientes;

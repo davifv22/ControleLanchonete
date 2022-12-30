@@ -3,45 +3,102 @@
 <title>{{ name_company }}</title>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="" style="padding-right: 60px; text-align: center;">{{ name_company }}</a>
+        <a class="navbar-brand ps-5 text-align-center">{{ name_company }}</a>
+        <div class="container">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url_for('panel.home')}}">Home</a>
+                        <a class="nav-link active " aria-current="page" href="{{url_for('panel.home')}}"><svg
+                                id="i-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40"
+                                height="20" fill="none" stroke="currentcolor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="2"
+                                class="position-relative top-0 start-50 translate-middle">
+                                <path d="M12 20 L12 30 4 30 4 12 16 2 28 12 28 30 20 30 20 20 Z" />
+                            </svg> <br>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('panel.pedidos_')}}">Pedidos</a>
+                        <a class="nav-link" href="{{url_for('panel.pedidos_')}}"> <svg id="i-compose"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40" height="20"
+                                fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="position-relative top-0 start-50 translate-middle">
+                                <path
+                                    d="M27 15 L27 30 2 30 2 5 17 5 M30 6 L26 2 9 19 7 25 13 23 Z M22 6 L26 10 Z M9 19 L13 23 Z" />
+                            </svg> <br>Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('panel.cardapio')}}">Cardápio</a>
+                        <a class="nav-link" href="{{url_for('panel.cardapio')}}"> <svg id="i-clipboard"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40" height="20"
+                                fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="position-relative top-0 start-50 translate-middle">
+                                <path d="M12 2 L12 6 20 6 20 2 12 2 Z M11 4 L6 4 6 30 26 30 26 4 21 4" />
+                            </svg> <br>Cardápio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            data-bs-toggle="dropdown" aria-expanded="false"> <svg id="i-edit"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40" height="20"
+                                fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="position-relative top-0 start-50 translate-middle">
+                                <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+                            </svg> <br>Cadastros</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{url_for('cad.empresa')}}">Empresa</a></li>
                             <li><a class="dropdown-item" href="{{url_for('cad.usuarios')}}">Usuários</a></li>
                             <li><a class="dropdown-item" href="{{url_for('cad.cardapio')}}">Cardápio</a></li>
                             <li><a class="dropdown-item" href="{{url_for('cad.fornecedores')}}">Fornecedores</a>
                             </li>
                             <li>
-                                <hr class="dropdown-divider">
+                                <hr class="dropdown-divide ">
                             </li>
                             <li><a class="dropdown-item" href="{{url_for('cad.config')}}">Parametrização</a>
                             </li>
                         </ul>
                     </li>
+                    <div class="d-flex align-items-center text-white">
+                        <div>
+                            <p style="text-align: center; font-size: 15px;">
+                                <svg id="i-calendar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="19"
+                                    height="19" fill="none" stroke="currentcolor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2">
+                                    <path
+                                        d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9" />
+                                </svg> {{date}}
+                            </p>
+                            <p style="text-align: center; font-size: 15px;">
+                                <svg id="i-clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="19"
+                                    height="19" fill="none" stroke="currentcolor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2">
+                                    <circle cx="16" cy="16" r="14" />
+                                    <path d="M16 8 L16 16 20 20" />
+                                </svg> 00:00:00
+                            </p>
+                        </div>
+                    </div>
                 </ul>
+
             </div>
         </div>
-        <h6 style="width: 200px; color: rgb(212, 212, 212); text-align: center; font-size: 13px;">{{date}}</h6>
-        <h6 style="width: 200px; color: rgb(212, 212, 212); text-align: center; font-size: 13px;">Bem
-            vindo,<br> {{user}}!</h6>
-        <a style="margin: 0px 15px;" href="/auth/logout" role="button">Sair</a>
+
+        <div class="d-flex align-items-center text-bg-dark me-4 mt-1">
+            <svg id="i-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="none"
+                stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                class="top-0 start-50 translate-middle">
+                <path
+                    d="M22 11 C22 16 19 20 16 20 13 20 10 16 10 11 10 6 12 3 16 3 20 3 22 6 22 11 Z M4 30 L28 30 C28 21 22 20 16 20 10 20 4 21 4 30 Z" />
+            </svg>
+            <p>Bem vindo,<br> {{user}}!</p>
+            <a href="/auth/logout" role="button" title="Sair"><svg id="i-signout" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentcolor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2">
+                    <path d="M28 16 L8 16 M20 8 L28 16 20 24 M11 28 L3 28 3 4 11 4" />
+                </svg>
+                <p>Sair</p>
+            </a>
+
+        </div>
     </nav>
 </header>
-<main class="container pt-5">
+<main class="container pt-5 mt-5">
     {% block panel %}
     <br>
     <h3 style="text-align: center;">HOME</h3>
@@ -58,7 +115,7 @@
             <div class="card-header text-center">FATURAMENTO</div>
             <div class="card-body">
                 <h5 class="card-title text-center">R$ 0,00</h5>
-                <p class="card-text text-center">Receitas ganhas no mês atual</p>
+                <p class="card-text text-center">Receitas do mês atual</p>
             </div>
         </div>
         <div class="card text-bg-danger mb-3" style="min-width: 17rem;">
