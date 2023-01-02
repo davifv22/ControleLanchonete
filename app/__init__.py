@@ -56,6 +56,39 @@ class pedidos(UserMixin, db.Model):
         self.order_time = order_time
         self.situation = situation
 
+class cadempresa(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    company_name = db.Column(db.String(100))
+    corporate_name = db.Column(db.String(100))
+    address = db.Column(db.String(100))
+    district = db.Column(db.String(200))
+    city = db.Column(db.String(200))
+    cep = db.Column(db.String(50))
+    email = db.Column(db.String(50))
+    tel = db.Column(db.String(50))
+    cnpj = db.Column(db.String(50))
+    dt_create = db.Column(db.DATETIME)
+
+    def __init__(self, company_name, corporate_name, address, district, city, cep, email, tel, cnpj, dt_create):
+        self.company_name = company_name
+        self.corporate_name = corporate_name
+        self.address = address
+        self.district = district
+        self.city = city
+        self.cep = cep
+        self.email = email
+        self.tel = tel
+        self.cnpj = cnpj
+        self.dt_create = dt_create
+
+class controle(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    debito = db.Column(db.String(50))
+    dt_ref = db.Column(db.String(50))
+    
+    def __init__(self, debito, dt_ref):
+        self.debito = debito
+        self.dt_ref = dt_ref
 
 # CRIA OS ROTEAMENTOS
 from . import index
