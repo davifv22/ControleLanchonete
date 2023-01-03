@@ -21,14 +21,14 @@
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
             tabindex="0">
 
-            <form class="row g-3 text-bg-dark pb-3 rounded">
+            <form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.config')}}" method="POST">
                 <div class="col-md-6">
                     <label for="debito" class="form-label">Capital inicial</label>
-                    <input type="text" class="form-control" id="debito" name="debito" value="{{ debito }}" required>
+                    <input type="text" class="form-control" id="debito" name="debito" value="{{ config1.debito }}" required>
                 </div>
                 <div class="col-md-6">
                     <label for="dt_ref" class="form-label">Referência</label>
-                    <input type="text" class="form-control" id="dt_ref" name="dt_ref" value="{{ dt_ref }}" required>
+                    <input type="text" class="form-control" id="dt_ref" name="dt_ref" value="{{ config1.dt_ref }}" required>
                 </div>
                 <!-- <div class="col-12">
                     <label for="bairro" class="form-label">Bairro</label>

@@ -3,12 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from datetime import datetime
 import secrets
+import locale
 
 # CRIA E CONFIGURA APP
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banco.db'
 app.config['SECRET_KEY'] = "random string"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+locale.setlocale(locale.LC_ALL, '')
 
 # CRIA DB E LOGIN
 db = SQLAlchemy(app)
@@ -42,18 +45,41 @@ class users(UserMixin, db.Model):
 class pedidos(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name_client = db.Column(db.String(100))
-    items = db.Column(db.String(100))
+    payment = db.Column(db.String(100))
+    delivery = db.Column(db.String(100))
+    note = db.Column(db.String(200))
+    amount = db.Column(db.String(100))
     address = db.Column(db.String(100))
     tel = db.Column(db.String(200))
     order_time = db.Column(db.DATETIME)
     situation = db.Column(db.String(50))
     
-    def __init__(self, name_client, items, address, tel, order_time, situation):
+    def __init__(self, name_client, payment, delivery, note, amount, address, tel, order_time, situation):
         self.name_client = name_client
-        self.items = items
+        self.payment = payment
+        self.delivery = delivery
+        self.note = note
+        self.amount = amount
         self.address = address
         self.tel = tel
         self.order_time = order_time
+        self.situation = situation
+        
+class pedidos_items(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_pedido = db.Column(db.Integer)
+    product_name = db.Column(db.String(100))
+    additional = db.Column(db.String(100))
+    note = db.Column(db.String(100))
+    amount = db.Column(db.String(100))
+    situation = db.Column(db.String(50))
+    
+    def __init__(self, id_pedido, product_name, additional, note, amount, situation):
+        self.id_pedido = id_pedido
+        self.product_name = product_name
+        self.additional = additional
+        self.note = note
+        self.amount = amount
         self.situation = situation
 
 class cadempresa(UserMixin, db.Model):
@@ -68,7 +94,7 @@ class cadempresa(UserMixin, db.Model):
     tel = db.Column(db.String(50))
     cnpj = db.Column(db.String(50))
     dt_create = db.Column(db.DATETIME)
-
+    
     def __init__(self, company_name, corporate_name, address, district, city, cep, email, tel, cnpj, dt_create):
         self.company_name = company_name
         self.corporate_name = corporate_name

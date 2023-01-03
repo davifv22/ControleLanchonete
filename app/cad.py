@@ -28,11 +28,8 @@ def empresa():
         return redirect('/painel/cad/empresa')
 
     cad_empresa = cadempresa.query.filter_by(id=1).first()
-
-    name_company = "Nome empresa"
-    date = datetime.now().strftime('%d/%m/%Y')
-    user = current_user.name
-    return render_template('panel/cadastros/empresa.html', name_company=name_company, date=date, user=user, cad_empresa=cad_empresa)
+    menu_panel = panel.load_menu()
+    return render_template('panel/cadastros/empresa.html', menu_panel=menu_panel, cad_empresa=cad_empresa)
 
 
 @bp.route('/usuarios', methods=['POST', 'GET'])
@@ -40,10 +37,8 @@ def empresa():
 def usuarios():
     if request.method == 'POST':
         pass
-    name_company = "Nome empresa"
-    date = datetime.now().strftime('%d/%m/%Y')
-    user = current_user.name
-    return render_template('panel/cadastros/users.html', name_company=name_company, date=date, user=user)
+    menu_panel = panel.load_menu()
+    return render_template('panel/cadastros/users.html', menu_panel=menu_panel)
 
 
 @bp.route('/cardapio', methods=['POST', 'GET'])
@@ -51,10 +46,8 @@ def usuarios():
 def cardapio():
     if request.method == 'POST':
         pass
-    name_company = "Nome empresa"
-    date = datetime.now().strftime('%d/%m/%Y')
-    user = current_user.name
-    return render_template('panel/cadastros/cardapio.html', name_company=name_company, date=date, user=user)
+    menu_panel = panel.load_menu()
+    return render_template('panel/cadastros/cardapio.html', menu_panel=menu_panel)
 
 
 @bp.route('/fornecedores', methods=['POST', 'GET'])
@@ -62,10 +55,8 @@ def cardapio():
 def fornecedores():
     if request.method == 'POST':
         pass
-    name_company = "Nome empresa"
-    date = datetime.now().strftime('%d/%m/%Y')
-    user = current_user.name
-    return render_template('panel/cadastros/fornecedores.html', name_company=name_company, date=date, user=user)
+    menu_panel = panel.load_menu()
+    return render_template('panel/cadastros/fornecedores.html', menu_panel=menu_panel)
 
 
 @bp.route('/config', methods=['POST', 'GET'])
@@ -78,13 +69,11 @@ def config():
             add = controle(debito=debito, dt_ref=dt_ref)
             db.session.add(add)
         else:
-            controle.query.filter_by(id=1).update({"debito": debito, "dt_ref": dt_ref})
+            controle.query.filter_by(id=1).update(
+                {"debito": debito, "dt_ref": dt_ref})
         db.session.commit()
-        return redirect('/painel/cad/empresa')
-            
-        
-        
-    name_company = "Nome empresa"
-    date = datetime.now().strftime('%d/%m/%Y')
-    user = current_user.name
-    return render_template('panel/config.html', name_company=name_company, date=date, user=user)
+        return redirect('/painel/cad/config')
+
+    config1 = controle.query.filter_by(id=1).first()
+    menu_panel = panel.load_menu()
+    return render_template('panel/config.html', config1=config1, menu_panel=menu_panel)

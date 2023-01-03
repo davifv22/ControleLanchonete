@@ -4,7 +4,7 @@
 <h3 style="text-align: center;">CADASTRO DA EMPRESA</h3>
 <hr>
 <br>
-<form class="row g-3 text-bg-dark pb-3 rounded" action="/painel/cad/empresa" method="POST">
+<form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.empresa')}}"" method="POST">
     <div class="col-md-6">
         <label for="company_name" class="form-label">Nome empresa</label>
         <input type="text" class="form-control" id="company_name" name="company_name"
