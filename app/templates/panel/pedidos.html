@@ -20,9 +20,11 @@
                     {% if pedido.situation == 'PENDENTE' %}
                     <b class="situacao bg-danger">PENDENTE</b>
                     {% elif pedido.situation == 'EM ANDAMENTO' %}
-                    <b class="situacao bg-success">EM ANDAMENTO</b>
-                    {% elif pedido.situation == 'NA ENTREGA' %}
-                    <b class="situacao bg-secondary">NA ENTREGA</b>
+                    <b class="situacao bg-secondary">EM ANDAMENTO</b>
+                    {% elif pedido.situation == 'EM ENTREGA' %}
+                    <b class="situacao bg-success">EM ENTREGA</b>
+                    {% elif pedido.situation == 'RETIRAR' %}
+                    <b class="situacao bg-success">RETIRAR</b>
                     {% endif %}
                 </th>
             </tr>
@@ -37,7 +39,7 @@
             <tr>
                 <td>Total itens:</td>
                 <td>5.0</td>
-                <td>R$ 55,00</td>
+                <td>R$ 43,60</td> <!-- pegar soma da tab. pedidos_items -->
             </tr>
         </tbody>
         <tfoot>
@@ -48,29 +50,39 @@
             </tr>
             <tr class="ttu">
                 <td colspan="2">Sub-total</td>
-                <td align="right">R$43,60</td>
+                <td align="right">R$ 43,60</td> <!-- pegar soma da tab. pedidos_items -->
             </tr>
+            {% if pedido.delivery == 'SIM' %}
             <tr class="ttu">
                 <td colspan="2">Entrega</td>
-                <td align="right">R$4,60</td>
+                <td align="right">R$ 4,60</td>
             </tr>
+            {% else %}
+            <tr class="ttu">
+                <td colspan="2">Entrega</td>
+                <td align="right">R$ 0,00</td>
+            </tr>
+            {% endif %}
             <tr class="ttu">
                 <td colspan="2">Total</td>
-                <td align="right">R$45,56</td>
+                <td align="right">R$ {{ pedido.amount }}</td>
             </tr>
+
             <tr class="sup">
                 <td colspan="3" align="center">
                     <div class="d-flex justify-content-center">
                         {% if pedido.situation == 'PENDENTE' %}
-                        <a href="#" class="btn btn-success btn-sm m-1">Preparar</a>
+                        <a href="{{pedido.id}}/prepare/change_order" class="btn btn-success btn-sm m-1">Preparar</a>
                         {% elif pedido.situation == 'EM ANDAMENTO' %}
-                        <a href="#" class="btn btn-success btn-sm m-1">Finalizar</a>
-                        {% elif pedido.situation == 'NA ENTREGA' %}
-                        <a href="#" class="btn btn-success btn-sm m-1">Finalizar</a>
+                        <a href="{{pedido.id}}/deliver/change_order" class="btn btn-success btn-sm m-1">Entregar</a>
+                        {% elif pedido.situation == 'EM ENTREGA' %}
+                        <a href="{{pedido.id}}/finalize/change_order" class="btn btn-success btn-sm m-1">Entregue</a>
+                        {% elif pedido.situation == 'RETIRAR' %}
+                        <a href="{{pedido.id}}/finalize/change_order" class="btn btn-success btn-sm m-1">Retirado</a>
                         {% endif %}
                         <button type="button" class="btn btn-primary btn-sm m-1" data-bs-toggle="modal"
                             data-bs-target="#{{ pedido.id }}">Detalhes</button>
-                        <a href="#" class="btn btn-danger btn-sm m-1">Cancelar</a>
+                        <a href="{{pedido.id}}/cancel/change_order" class="btn btn-danger btn-sm m-1">Cancelar</a>
                     </div>
                 </td>
             </tr>

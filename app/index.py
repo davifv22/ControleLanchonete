@@ -16,6 +16,6 @@ def index_():
         db.session.add(add)
         db.session.commit()
         return redirect('/')
-        
-    name_company = "Nome empresa"
-    return render_template('index/index.html', name_company=name_company)
+
+    menu_panel = load_menu()
+    return render_template('index/index.html', menu_panel=menu_panel)

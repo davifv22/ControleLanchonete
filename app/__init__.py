@@ -52,9 +52,10 @@ class pedidos(UserMixin, db.Model):
     address = db.Column(db.String(100))
     tel = db.Column(db.String(200))
     order_time = db.Column(db.DATETIME)
+    order_start = db.Column(db.DATETIME)
     situation = db.Column(db.String(50))
     
-    def __init__(self, name_client, payment, delivery, note, amount, address, tel, order_time, situation):
+    def __init__(self, name_client, payment, delivery, note, amount, address, tel, order_time, order_start, situation):
         self.name_client = name_client
         self.payment = payment
         self.delivery = delivery
@@ -63,6 +64,7 @@ class pedidos(UserMixin, db.Model):
         self.address = address
         self.tel = tel
         self.order_time = order_time
+        self.order_start = order_start
         self.situation = situation
         
 class pedidos_items(UserMixin, db.Model):
@@ -115,6 +117,34 @@ class controle(UserMixin, db.Model):
     def __init__(self, debito, dt_ref):
         self.debito = debito
         self.dt_ref = dt_ref
+
+# FUNÇÕES COM VARIAVEIS GLOBAIS
+
+def load_menu():
+    empresa = cadempresa.query.filter_by(id=1).first()
+    if empresa is None:
+        company_name = 'NOME EMPRESA'
+    else:
+        company_name = empresa.company_name
+    username = current_user.name
+    return username, company_name
+
+
+def load_values_panel():
+    # debito
+    debito = db.session.query(db.func.sum(controle.debito)).scalar()
+    if db.session.query(db.func.sum(pedidos.amount)).scalar() is None:
+        faturamento = 0
+    else:
+        faturamento = db.session.query(
+            db.func.sum(pedidos.amount)).scalar()
+    # if db.session.query(db.func.sum(compras.valor_total)).scalar() is None:
+    despesas = -10.00
+    # else:
+    #     despesas = db.session.query(db.func.sum(compras.valor_total)).scalar()
+    total = float(debito) + float(faturamento) - float(despesas)
+    return locale.currency(debito, grouping=True), locale.currency(faturamento, grouping=True), locale.currency(despesas, grouping=True), locale.currency(total, grouping=True)
+
 
 # CRIA OS ROTEAMENTOS
 from . import index

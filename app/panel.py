@@ -20,7 +20,7 @@ def pedidos_():
         pass
 
     menu_panel = load_menu()
-    all_pedidos = pedidos.query.filter(pedidos.situation != 'FINALIZADO').all()
+    all_pedidos = pedidos.query.filter(pedidos.situation != 'FINALIZADO',pedidos.situation != 'CANCELADO').all()
     return render_template('panel/pedidos.html', menu_panel=menu_panel, all_pedidos=all_pedidos)
 
 
@@ -33,28 +33,42 @@ def cardapio():
     return render_template('panel/cardapio.html', menu_panel=menu_panel)
 
 
-# FUNÇÕES COM VARIAVEIS GLOBAIS
-def load_menu():
-    empresa = cadempresa.query.filter_by(id=1).first()
-    if empresa is None:
-        company_name = 'NOME EMPRESA'
-    else:
-        company_name = empresa.company_name
-    username = current_user.name
-    return username, company_name
 
+@bp.route('/<int:id>/<case>/change_order')
+@login_required
+def change_order(id, case):
+    match case:
 
-def load_values_panel():
-    # debito
-    debito = db.session.query(db.func.sum(controle.debito)).scalar()
-    if db.session.query(db.func.sum(pedidos.amount)).scalar() is None:
-        faturamento = 0
-    else:
-        faturamento = db.session.query(
-            db.func.sum(pedidos.amount)).scalar()
-    # if db.session.query(db.func.sum(compras.valor_total)).scalar() is None:
-    despesas = -10.00
-    # else:
-    #     despesas = db.session.query(db.func.sum(compras.valor_total)).scalar()
-    total = float(debito) + float(faturamento) - float(despesas)
-    return locale.currency(debito, grouping=True), locale.currency(faturamento, grouping=True), locale.currency(despesas, grouping=True), locale.currency(total, grouping=True)
+        case 'prepare':
+            situation = "EM ANDAMENTO"
+            order_start = datetime.now()
+            pedidos.query.filter_by(id=id).update(
+                {"order_start": order_start, "situation": situation})
+            db.session.commit()
+
+        case 'deliver':
+            delivery = pedidos.query.filter_by(id=id).first()
+            if delivery.delivery == 'SIM':
+                situation = "EM ENTREGA"
+                pedidos.query.filter_by(id=id).update(
+                    {"situation": situation})
+                db.session.commit()
+            else:
+                situation = "RETIRAR"
+                pedidos.query.filter_by(id=id).update(
+                    {"situation": situation})
+                db.session.commit()
+
+        case 'finalize':
+                situation = "FINALIZADO"
+                pedidos.query.filter_by(id=id).update(
+                    {"situation": situation})
+                db.session.commit()
+
+        case 'cancel':
+            situation = "CANCELADO"
+            pedidos.query.filter_by(id=id).update(
+                {"situation": situation})
+            db.session.commit()
+
+    return redirect('/painel/pedidos')

@@ -4,7 +4,7 @@
 <h3 style="text-align: center;">CADASTRO DA EMPRESA</h3>
 <hr>
 <br>
-<form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.empresa')}}"" method="POST">
+<form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.empresa')}}" method="POST">
     <div class="col-md-6">
         <label for="company_name" class="form-label">Nome empresa</label>
         <input type="text" class="form-control" id="company_name" name="company_name"
@@ -46,7 +46,8 @@
     </div>
     <div class="col-md-3">
         <label for="dt_create" class="form-label">Data implantação</label>
-        <input type="text" class="form-control" id="dt_create" name="dt_create" value="{{cad_empresa.dt_create}}" disabled>
+        <input type="text" class="form-control" id="dt_create" name="dt_create" value="{{cad_empresa.dt_create}}"
+            disabled>
     </div>
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Atualizar</button>
