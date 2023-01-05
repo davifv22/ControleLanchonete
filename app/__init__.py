@@ -51,8 +51,8 @@ class pedidos(UserMixin, db.Model):
     amount = db.Column(db.String(100))
     address = db.Column(db.String(100))
     tel = db.Column(db.String(200))
-    order_time = db.Column(db.DATETIME)
-    order_start = db.Column(db.DATETIME)
+    order_time = db.Column(db.String(200))
+    order_start = db.Column(db.String(200))
     situation = db.Column(db.String(50))
     
     def __init__(self, name_client, payment, delivery, note, amount, address, tel, order_time, order_start, situation):
@@ -133,16 +133,18 @@ def load_menu():
 def load_values_panel():
     # debito
     debito = db.session.query(db.func.sum(controle.debito)).scalar()
-    if db.session.query(db.func.sum(pedidos.amount)).scalar() is None:
+    
+    if db.session.query(db.func.sum(pedidos.amount)).filter(pedidos.situation == 'FINALIZADO').scalar() is None:
         faturamento = 0
     else:
         faturamento = db.session.query(
-            db.func.sum(pedidos.amount)).scalar()
+            db.func.sum(pedidos.amount)).filter(pedidos.situation == 'FINALIZADO').scalar()
+        
     # if db.session.query(db.func.sum(compras.valor_total)).scalar() is None:
-    despesas = -10.00
+    despesas = -875.00
     # else:
     #     despesas = db.session.query(db.func.sum(compras.valor_total)).scalar()
-    total = float(debito) + float(faturamento) - float(despesas)
+    total = float(debito) + float(faturamento) + float(despesas)
     return locale.currency(debito, grouping=True), locale.currency(faturamento, grouping=True), locale.currency(despesas, grouping=True), locale.currency(total, grouping=True)
 
 

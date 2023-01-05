@@ -3,6 +3,20 @@
 <br>
 <h3 style="text-align: center;">PEDIDOS</h3>
 <hr>
+<div class="d-flex justify-content-center">
+    <a href="{{url_for('cad.addOrder')}}" class="btn btn-info btn-sm m-1"><svg id="i-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+            width="15" height="15" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" class="mb-1">
+            <path d="M16 2 L16 30 M2 16 L30 16" />
+        </svg> ADICIONAR PEDIDO
+    </a>
+    <a href="{{url_for('panel.allOrders')}}" class="btn btn-info btn-sm m-1">
+        <svg id="i-external" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="15" height="15" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mb-1">
+            <path d="M14 9 L3 9 3 29 23 29 23 18 M18 4 L28 4 28 14 M28 4 L14 18" />
+        </svg> TODOS PEDIDOS
+    </a>
+</div>
 <div class="d-flex justify-content-around flex-wrap">
     {% for pedido in all_pedidos %}
     <table class="printer-ticket m-2">
@@ -52,7 +66,7 @@
                 <td colspan="2">Sub-total</td>
                 <td align="right">R$ 43,60</td> <!-- pegar soma da tab. pedidos_items -->
             </tr>
-            {% if pedido.delivery == 'SIM' %}
+            {% if pedido.delivery == 'ENTREGA' %}
             <tr class="ttu">
                 <td colspan="2">Entrega</td>
                 <td align="right">R$ 4,60</td>
@@ -88,6 +102,126 @@
             </tr>
         </tfoot>
     </table>
+
+
+
+
+
+    <div class="modal fade" id="{{ pedido.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-bg-dark">
+                <div class="modal-header d-block text-center">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Pedido: #{{ pedido.id }}</h1>
+                    <br>
+                    <h6 class="ttu">
+                        {% if pedido.situation == 'PENDENTE' %}
+                        <b class="situacao bg-danger">PENDENTE</b>
+                        {% elif pedido.situation == 'EM ANDAMENTO' %}
+                        <b class="situacao bg-secondary">EM ANDAMENTO</b>
+                        {% elif pedido.situation == 'EM ENTREGA' %}
+                        <b class="situacao bg-success">EM ENTREGA</b>
+                        {% elif pedido.situation == 'RETIRAR' %}
+                        <b class="situacao bg-success">RETIRAR</b>
+                        {% endif %}
+                    </h6>
+                </div>
+                <div class="modal-body">
+                    <form action="{{url_for('panel.pedidos_', id=pedido.id)}}" method="POST">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name_client">Nome cliente</label>
+                                <input type="text" class="form-control form-control-sm" id="name_client"
+                                    name="name_client" value="{{ pedido.name_client }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="payment">Pagamento</label>
+                                <select class="form-select form-select-sm" name="payment" id="payment"
+                                    aria-label=".form-select-sm example" required>
+                                    <option value="{{ pedido.payment }}">{{ pedido.payment }}</option>
+                                    <option value="DINHEIRO">Dinheiro</option>
+                                    <option value="CARTAO DEBITO">Cartão Débito</option>
+                                    <option value="CARTAO CREDITO">Cartão Crédito</option>
+                                    <option value="VALE ALIMENTACAO">Vale Alimentação</option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="address">Endereço</label>
+                                <input type="text" class="form-control form-control-sm" id="address" name="address"
+                                    value="{{ pedido.address }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="delivery">Frete</label>
+                                <select class="form-select form-select-sm" name="delivery" id="delivery"
+                                    aria-label=".form-select-sm example" required>
+                                    <option value="{{ pedido.delivery }}">{{ pedido.delivery }}</option>
+                                    <option value="ENTREGA">Entrega</option>
+                                    <option value="RETIRADA">Retirada</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tel">Telefone</label>
+                                <input type="text" class="form-control form-control-sm" id="tel" name="tel"
+                                    value="{{ pedido.tel }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="amount">Total</label>
+                                <input type="text" class="form-control form-control-sm" id="amount" name="amount"
+                                    value="{{ pedido.amount }}" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="order_time">Horário do Pedido</label>
+                                <input type="text" class="form-control form-control-sm" id="order_time"
+                                    name="order_time" value="{{ pedido.order_time }}" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="order_start">Pedido Iniciado</label>
+                                <input type="text" class="form-control form-control-sm" id="order_start"
+                                    name="order_start" value="{{ pedido.order_start }}" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="note">Observação</label>
+                                <textarea class="form-control form-control-sm" id="note" name="note"
+                                    rows="1">{{ pedido.note }}</textarea>
+                            </div>
+
+                            <table class="table text-bg-dark text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry the Bird</td>
+                                        <td>Larry the Bird</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                data-bs-dismiss="modal">Voltar</button>
+                            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Deseja atualizar o pedido #{{pedido.id}}?')">Atualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

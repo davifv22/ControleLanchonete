@@ -77,3 +77,10 @@ def config():
     config1 = controle.query.filter_by(id=1).first()
     menu_panel = panel.load_menu()
     return render_template('panel/config.html', config1=config1, menu_panel=menu_panel)
+
+
+@bp.route('/addorder', methods=['POST', 'GET'])
+@login_required
+def addOrder():
+    menu_panel = panel.load_menu()
+    return render_template('panel/cadastros/addProduto.html', menu_panel=menu_panel)
