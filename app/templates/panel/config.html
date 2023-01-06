@@ -24,19 +24,19 @@
             <form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.config')}}" method="POST">
                 <div class="col-md-6">
                     <label for="debito" class="form-label">Capital inicial</label>
-                    <input type="text" class="form-control" id="debito" name="debito" value="{{ config1.debito }}" required>
+                    <input type="text" class="form-control form-control-sm" id="debito" name="debito" value="{{ config1.debito }}" required>
                 </div>
                 <div class="col-md-6">
                     <label for="dt_ref" class="form-label">Referência</label>
-                    <input type="text" class="form-control" id="dt_ref" name="dt_ref" value="{{ config1.dt_ref }}" required>
+                    <input type="text" class="form-control form-control-sm" id="dt_ref" name="dt_ref" value="{{ config1.dt_ref }}" required>
                 </div>
                 <!-- <div class="col-12">
                     <label for="bairro" class="form-label">Bairro</label>
-                    <input type="text" class="form-control" id="bairro" required>
+                    <input type="text" class="form-control form-control-sm" id="bairro" required>
                 </div>
                 <div class="col-md-6">
                     <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="inputCity">
+                    <input type="text" class="form-control form-control-sm" id="inputCity">
                 </div> -->
                 <!-- <div class="col-md-4">
                     <label for="inputState" class="form-label">State</label>
@@ -47,10 +47,10 @@
                 </div>
                 <div class="col-md-2">
                     <label for="inputZip" class="form-label">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
+                    <input type="text" class="form-control form-control-sm" id="inputZip">
                 </div> -->
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                    <button type="submit" class="btn btn-success btn-sm">Atualizar</button>
                 </div>
             </form>
 

@@ -7,50 +7,50 @@
 <form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.empresa')}}" method="POST">
     <div class="col-md-6">
         <label for="company_name" class="form-label">Nome empresa</label>
-        <input type="text" class="form-control" id="company_name" name="company_name"
+        <input type="text" class="form-control form-control-sm" id="company_name" name="company_name"
             value="{{cad_empresa.company_name}}" required>
     </div>
     <div class="col-md-6">
         <label for="corporate_name" class="form-label">Razão social</label>
-        <input type="text" class="form-control" id="corporate_name" name="corporate_name"
+        <input type="text" class="form-control form-control-sm" id="corporate_name" name="corporate_name"
             value="{{cad_empresa.corporate_name}}" required>
     </div>
     <div class="col-6">
         <label for="address" class="form-label">Endereço</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Rua tal, 00"
+        <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Rua tal, 00"
             value="{{cad_empresa.address}}" required>
     </div>
     <div class="col-2">
         <label for="district" class="form-label">Bairro</label>
-        <input type="text" class="form-control" id="district" name="district" value="{{cad_empresa.district}}" required>
+        <input type="text" class="form-control form-control-sm" id="district" name="district" value="{{cad_empresa.district}}" required>
     </div>
     <div class="col-md-2">
         <label for="city" class="form-label">Cidade</label>
-        <input type="text" class="form-control" id="city" name="city" value="{{cad_empresa.city}}" required>
+        <input type="text" class="form-control form-control-sm" id="city" name="city" value="{{cad_empresa.city}}" required>
     </div>
     <div class="col-md-2">
         <label for="cep" class="form-label">CEP</label>
-        <input type="text" class="form-control" id="cep" name="cep" value="{{cad_empresa.cep}}" required>
+        <input type="text" class="form-control form-control-sm" id="cep" name="cep" value="{{cad_empresa.cep}}" required>
     </div>
     <div class="col-md-2">
         <label for="email" class="form-label">E-mail</label>
-        <input type="text" class="form-control" id="email" name="email" value="{{cad_empresa.email}}" required>
+        <input type="text" class="form-control form-control-sm" id="email" name="email" value="{{cad_empresa.email}}" required>
     </div>
     <div class="col-md-2">
         <label for="tel" class="form-label">Telefone</label>
-        <input type="text" class="form-control" id="tel" name="tel" value="{{cad_empresa.tel}}" required>
+        <input type="text" class="form-control form-control-sm" id="tel" name="tel" value="{{cad_empresa.tel}}" required>
     </div>
     <div class="col-md-2">
         <label for="cnpj" class="form-label">CNPJ</label>
-        <input type="text" class="form-control" id="cnpj" name="cnpj" value="{{cad_empresa.cnpj}}" required>
+        <input type="text" class="form-control form-control-sm" id="cnpj" name="cnpj" value="{{cad_empresa.cnpj}}" required>
     </div>
     <div class="col-md-3">
         <label for="dt_create" class="form-label">Data implantação</label>
-        <input type="text" class="form-control" id="dt_create" name="dt_create" value="{{cad_empresa.dt_create}}"
+        <input type="text" class="form-control form-control-sm" id="dt_create" name="dt_create" value="{{cad_empresa.dt_create}}"
             disabled>
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary">Atualizar</button>
+        <button type="submit" class="btn btn-success btn-sm">Atualizar</button>
     </div>
 </form>
 {% endblock %}

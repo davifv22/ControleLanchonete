@@ -3,4 +3,83 @@
 <br>
 <h3 style="text-align: center;">CADASTRO DO CARDÁPIO</h3>
 <hr>
+<div class="d-flex">
+    <form class="row g-3 text-bg-dark pb-3 rounded m-1">
+        <h4 class="text-center">MONTAR PRODUTO</h4>
+        <hr>
+        <div class="col-12">
+            <select id="inputState" class="form-select form-select-sm">
+                <option selected disabled>Selecione o produto...</option>
+                <option>01 - X-Tudo</option>
+                <option>02 - X-Salada</option>
+                <option>03 - X-Bacon</option>
+                <option>04 - X-Queijo</option>
+            </select>
+        </div>
+        <div class="col-md-10">
+            <label for="inputEmail4" class="form-label">Titulo</label>
+            <input type="email" class="form-control form-control-sm" id="inputEmail4">
+        </div>
+        <div class="col-md-2">
+            <label for="inputAddress" class="form-label">Valor</label>
+            <input type="number" class="form-control form-control-sm" id="inputAddress">
+        </div>
+        <div class="col-md-12">
+            <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+            <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+        </div>
+        <div class="col-8">
+            <input type="file" class="form-control form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+          </div>
+    </form>
+
+
+    <form class="row g-3 text-bg-dark pb-3 rounded m-1">
+        <h4 class="text-center">ADICIONAL</h4>
+        <hr>
+        <div class="col-12">
+            <select id="inputState" class="form-select form-select-sm">
+                <option selected disabled>Selecione o adicional...</option>
+                <option>01 - Bacon</option>
+                <option>02 - Queijo</option>
+                <option>03 - Hamburguer</option>
+                <option>04 - Tomate</option>
+            </select>
+        </div>
+        <div class="col-9">
+            <label for="inputEmail4" class="form-label">Titulo</label>
+            <input type="email" class="form-control form-control-sm" id="inputEmail4">
+        </div>
+        <div class="col-3">
+            <label for="inputPassword4" class="form-label">Valor</label>
+            <input type="number" class="form-control form-control-sm" id="inputPassword4">
+        </div>
+        <div class="col-12">
+            <input type="hidden">
+        </div>
+        <div class="col-12">
+            <input type="hidden">
+        </div>
+        <div class="col-12">
+            <input type="hidden">
+        </div>
+        <div class="col-12">
+            <input type="hidden">
+        </div>
+        <div class="col-12">
+            <input type="hidden">
+        </div>
+        <br>
+        <br>
+        <div class="col-4">
+            <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+        </div>
+        <div class="col-8">
+            <input type="file" class="form-control form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+          </div>
+    </form>
+</div>
 {% endblock %}
