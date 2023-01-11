@@ -95,3 +95,16 @@ body::-webkit-scrollbar-thumb {
     background-color: #706c6c;
     border: 3px solid transparent;
 }
+
+.over::-webkit-scrollbar {
+    width: 2px;
+}
+
+.over::-webkit-scrollbar-track {
+    background-color: #1d2024;
+}
+
+.over::-webkit-scrollbar-thumb {
+    background-color: #706c6c;
+    border: 3px solid transparent;
+}

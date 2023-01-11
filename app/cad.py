@@ -2,6 +2,9 @@ from app import *
 
 bp = Blueprint('cad', __name__, url_prefix='/painel/cad')
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @bp.route('/empresa', methods=['POST', 'GET'])
 @login_required
@@ -40,15 +43,44 @@ def usuarios():
     menu_panel = panel.load_menu()
     return render_template('panel/cadastros/users.html', menu_panel=menu_panel)
 
-
+@bp.route('/cardapio/<case>/<int:id>', methods=['POST', 'GET'])
 @bp.route('/cardapio', methods=['POST', 'GET'])
 @login_required
-def cardapio():
+def cardapio(id=None, case=None):
     if request.method == 'POST':
-        pass
-    menu_panel = panel.load_menu()
-    return render_template('panel/cadastros/cardapio.html', menu_panel=menu_panel)
+        match case:
+            case 'adicionais':
+                title = request.form['title']
+                amount = request.form['amount']
+                situation = 'ATIVO'
+                adicional = adicionais(title=title, amount=amount, situation=situation)
+                db.session.add(adicional)
+            case 'produtos':
+                title = request.form['title']
+                amount = request.form['amount']
+                description = request.form['description']
 
+                file = request.files['file']
+                if not file.filename == '':
+                    if file and allowed_file(file.filename):
+                        filename = secure_filename(file.filename)
+                        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    else:
+                        flash('Extensão não suportada, a imagem deve ser .png, .jpg, .jpeg ou .webp')
+                        return redirect('/painel/cad/cardapio')
+                else:
+                    filename = 'product-default.webp'
+                    flash('Imagem não encontrada, adicionamos uma padrão!')
+                
+                situation = 'ATIVO'
+                produto = produtos(title=title, amount=amount, description=description, picture=filename, situation=situation)
+                db.session.add(produto)
+        db.session.commit()
+        return redirect('/painel/cad/cardapio')
+    
+    alladicionais = adicionais.query.filter_by(situation='ATIVO').all()
+    menu_panel = panel.load_menu()
+    return render_template('panel/cadastros/cardapio.html', menu_panel=menu_panel, alladicionais=alladicionais)
 
 @bp.route('/fornecedores', methods=['POST', 'GET'])
 @login_required

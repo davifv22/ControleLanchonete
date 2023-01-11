@@ -17,13 +17,22 @@
                             </svg> <br>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('panel.pedidos_')}}"> <svg id="i-compose"
+                        <a class="nav-link position-relative" href="{{url_for('panel.pedidos_')}}"> <svg id="i-compose"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40" height="20"
                                 fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" class="position-relative top-0 start-50 translate-middle">
                                 <path
                                     d="M27 15 L27 30 2 30 2 5 17 5 M30 6 L26 2 9 19 7 25 13 23 Z M22 6 L26 10 Z M9 19 L13 23 Z" />
-                            </svg> <br>Pedidos</a>
+                            </svg> <br>Pedidos 
+                            {% if menu_panel[2] > 0 %}
+                            <span
+                                class="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-danger">
+                                {{ menu_panel[2] }}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                            {% endif %}
+                        </a>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('panel.cardapio')}}"> <svg id="i-clipboard"
@@ -96,8 +105,22 @@
             </div>
         </div>
     </nav>
+
 </header>
-<main class="container pt-5 mt-4">
+<main class="container pt-5 mt-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="position-relative">
+        <div class="alert alert-warning alert-dismissible fade show z-3 position-absolute top-50 start-50 translate-middle-x"
+            role="alert">
+            <strong class="text-center">ATENÇÃO...</strong><br> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     {% block panel %}
     <br>
     <h3 style="text-align: center;">HOME</h3>
@@ -107,28 +130,28 @@
             <div class="card-header text-center">DÉBITO</div>
             <div class="card-body">
                 <h5 class="card-title text-center">{{ values_panel[0] }}</h5>
-                <p class="card-text text-center">Valor inicial do mês atual</p>
+                <p class="card-text text-center fst-italic">Valor que iniciou o mês atual</p>
             </div>
         </div>
         <div class="card text-bg-success mb-3" style="min-width: 17rem;">
             <div class="card-header text-center">FATURAMENTO</div>
             <div class="card-body">
                 <h5 class="card-title text-center">{{ values_panel[1] }}</h5>
-                <p class="card-text text-center">Receitas do mês atual</p>
+                <p class="card-text text-center fst-italic">Receitas do mês atual</p>
             </div>
         </div>
         <div class="card text-bg-danger mb-3" style="min-width: 17rem;">
             <div class="card-header text-center">DESPESAS</div>
             <div class="card-body">
                 <h5 class="card-title text-center">{{ values_panel[2] }}</h5>
-                <p class="card-text text-center">Desepesas do mês atual</p>
+                <p class="card-text text-center fst-italic">Desepesas do mês atual</p>
             </div>
         </div>
         <div class="card text-bg-dark mb-3" style="min-width: 17rem;">
             <div class="card-header text-center">VALOR FINAL</div>
             <div class="card-body">
                 <h5 class="card-title text-center">{{ values_panel[3] }}</h5>
-                <p class="card-text text-center">Valor total do mês atual</p>
+                <p class="card-text text-center fst-italic">Valor final do mês atual</p>
             </div>
         </div>
     </div>

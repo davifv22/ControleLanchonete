@@ -1,16 +1,30 @@
-from flask import Flask, Blueprint, redirect, render_template, request, flash, session
+from flask import Flask, Blueprint, redirect, render_template, request, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from werkzeug.utils import secure_filename
+import os
 from datetime import datetime
 import secrets
 import locale
+
+
 
 # CRIA E CONFIGURA APP
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banco.db'
 app.config['SECRET_KEY'] = "random string"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+# CONFIGURAÇÃO PARA UPLOADS
+path = os.getcwd()
+UPLOAD_FOLDER = os.path.join(path, 'app/static/img')
+if not os.path.isdir(UPLOAD_FOLDER):
+    os.mkdir(UPLOAD_FOLDER)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'webp'])
+
+# DEFINE LOCALIDADE DA MOEDA
 locale.setlocale(locale.LC_ALL, '')
 
 # CRIA DB E LOGIN
@@ -109,6 +123,34 @@ class cadempresa(UserMixin, db.Model):
         self.cnpj = cnpj
         self.dt_create = dt_create
 
+class produtos(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(50))
+    amount = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    picture = db.Column(db.String(200))
+    situation = db.Column(db.String(50))
+    
+    def __init__(self, title, amount, description, picture, situation):
+        self.title = title
+        self.amount = amount
+        self.description = description
+        self.picture = picture
+        self.situation = situation
+
+    
+class adicionais(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(50))
+    amount = db.Column(db.String(50))
+    situation = db.Column(db.String(50))
+    
+    def __init__(self, title, amount, situation):
+        self.title = title
+        self.amount = amount
+        self.situation = situation
+        
+
 class controle(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     debito = db.Column(db.String(50))
@@ -118,8 +160,8 @@ class controle(UserMixin, db.Model):
         self.debito = debito
         self.dt_ref = dt_ref
 
-# FUNÇÕES COM VARIAVEIS GLOBAIS
 
+# FUNÇÕES COM VARIAVEIS GLOBAIS
 def load_menu():
     empresa = cadempresa.query.filter_by(id=1).first()
     if empresa is None:
@@ -127,7 +169,8 @@ def load_menu():
     else:
         company_name = empresa.company_name
     username = current_user.name
-    return username, company_name
+    badgeOrder = pedidos.query.filter_by(situation='PENDENTE').all()
+    return username, company_name, len(badgeOrder)
 
 
 def load_values_panel():
