@@ -8,6 +8,7 @@ bp = Blueprint('panel', __name__, url_prefix='/painel')
 def home():
     if request.method == 'POST':
         pass
+    
     menu_panel = load_menu()
     values_panel = load_values_panel()
     return render_template('panel/home.html', menu_panel=menu_panel, values_panel=values_panel)
@@ -44,11 +45,13 @@ def cardapio():
     menu_panel = load_menu()
     return render_template('panel/cardapio.html', menu_panel=menu_panel, allProdutos=allProdutos)
 
+
 @bp.route('/allOrders')
 @login_required
 def allOrders():
     menu_panel = load_menu()
     return render_template('panel/allOrders.html', menu_panel=menu_panel)
+
 
 @bp.route('/<int:id>/<case>/change_order')
 @login_required
