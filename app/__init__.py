@@ -24,6 +24,9 @@ if not os.path.isdir(UPLOAD_FOLDER):
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'webp'])
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 # DEFINE LOCALIDADE DA MOEDA
 locale.setlocale(locale.LC_ALL, '')
 
@@ -161,7 +164,7 @@ class controle(UserMixin, db.Model):
         self.dt_ref = dt_ref
 
 
-# FUNÇÕES COM VARIAVEIS GLOBAIS
+# FUNÇÕES GLOBAIS
 def load_menu():
     empresa = cadempresa.query.filter_by(id=1).first()
     if empresa is None:
@@ -190,6 +193,13 @@ def load_values_panel():
     total = float(debito) + float(faturamento) + float(despesas)
     return locale.currency(debito, grouping=True), locale.currency(faturamento, grouping=True), locale.currency(despesas, grouping=True), locale.currency(total, grouping=True)
 
+def upload_image(file):
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return filename
+    else:
+        return False
 
 # CRIA OS ROTEAMENTOS
 from . import index

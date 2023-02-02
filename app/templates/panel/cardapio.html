@@ -3,25 +3,160 @@
 <br>
 <h3 style="text-align: center;">CARDÁPIO</h3>
 <hr>
+<div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseOne">
+                <h5 class="text-center"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15"
+                        viewBox="0 0 35 35">
+                        <path fill-rule="evenodd"
+                            d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z">
+                        </path>
+                    </svg>ADICIONAR</h5>
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body text-bg-dark">
+                <div class="d-flex">
+                    <form class="row g-3 text-bg-dark pb-3 rounded m-1" action="/painel/cardapio/produtos/1"
+                        method="POST" enctype="multipart/form-data">
+                        <h4 class="text-center">MONTAR PRODUTO</h4>
+                        <hr>
+                        <div class="col-md-10">
+                            <label for="title" class="form-label">Titulo</label>
+                            <input type="text" class="form-control form-control-sm" id="title" name="title" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="amount" class="form-label">Valor</label>
+                            <input type="number" class="form-control form-control-sm" id="amount" name="amount" min="1"
+                                step="0.01" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Descrição</label>
+                            <textarea class="form-control form-control-sm" id="description" rows="3" name="description"
+                                required></textarea>
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+                        </div>
+                        <div class="col-8">
+                            <input type="file" class="form-control form-control-sm" id="file" autocomplete="off"
+                                name="file">
+                        </div>
+                    </form>
+
+                    <form class="row g-3 text-bg-dark pb-3 rounded m-1" action="/painel/cardapio/adicionais/1"
+                        method="POST">
+                        <h4 class="text-center">ADICIONAL</h4>
+                        <hr>
+                        <div class="col-9">
+                            <label for="title" class="form-label">Titulo</label>
+                            <input type="text" class="form-control form-control-sm" id="title" name="title" required>
+                        </div>
+
+                        <div class="col-3">
+                            <label for="amount" class="form-label">Valor</label>
+                            <input type="number" class="form-control form-control-sm" id="amount" name="amount" min="1"
+                                step="0.01" required>
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 <div class="row row-cols-1 row-cols-md-4 g-3">
     {% for produto in allProdutos %}
     <div class="col">
         <div class="card text-bg-dark">
             <img src="../static/img/{{ produto.picture }}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title font-monospace">{{ produto.title }}</h5>
-                <p class="card-text overflow-auto over" style="height: 80px;">{{ produto.description }}</p>
-                <h5 class="font-monospace">R$ {{ produto.amount }}</h5>
-                <a href="" class="btn btn-success"><svg id="i-plus" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 32 32" width="15" height="15" fill="none" stroke="currentcolor"
-                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                        <path d="M16 2 L16 30 M2 16 L30 16" />
-                    </svg></a>
+                <form action="/painel/cardapio/cancelar/{{produto.id}}" method="POST" enctype="multipart/form-data">
+                    <h5 class="card-title font-monospace">{{ produto.title }}</h5>
+                    <p class="card-text overflow-auto over" style="height: 80px;">{{ produto.description }}</p>
+                    <h5 class="font-monospace">R$ {{ produto.amount }}</h5>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#{{ produto.id }}">
+                        EDITAR
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Deseja cancelar o produto {{produto.title}}?')">Cancelar</button>
+                </form>
             </div>
         </div>
-        
+    </div>
+
+    <div class="modal fade" id="{{ produto.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-bg-dark">
+                <div class="modal-header d-block text-center">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editando: {{ produto.title }}</h1>
+                </div>
+                <div class="modal-body">
+                    <form action="/painel/cardapio/atualizar/{{produto.id}}" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <input type="image" src="../static/img/{{ produto.picture }}"
+                                    class="img-fluid rounded mx-auto d-block" alt="">
+                            </div>
+                            <div class="col-md-8">
+                                <label for="title">Titulo</label>
+                                <input type="text" class="form-control form-control-sm" id="title" name="title"
+                                    value="{{ produto.title }}" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="amount">Valor</label>
+                                <input type="text" class="form-control form-control-sm" id="amount" name="amount"
+                                    value="{{ produto.amount }}" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="description">Observação</label>
+                                <textarea class="form-control form-control-sm" id="description" name="description"
+                                    rows="3">{{ produto.description }}</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="file">Imagem</label>
+                                <input type="file" class="form-control form-control-sm" id="file" autocomplete="off"
+                                    name="file">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                data-bs-dismiss="modal">Voltar</button>
+                            <button type="submit" class="btn btn-success btn-sm"
+                                onclick="return confirm('Deseja atualizar o produto {{produto.title}}?')">Atualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
-
 {% endblock %}
