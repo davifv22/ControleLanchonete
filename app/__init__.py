@@ -8,7 +8,6 @@ import secrets
 import locale
 
 
-
 # CRIA E CONFIGURA APP
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banco.db'
@@ -65,6 +64,7 @@ class pedidos(UserMixin, db.Model):
     payment = db.Column(db.String(100))
     delivery = db.Column(db.String(100))
     note = db.Column(db.String(200))
+    sub_amount = db.Column(db.String(100))
     amount = db.Column(db.String(100))
     address = db.Column(db.String(100))
     tel = db.Column(db.String(200))
@@ -72,11 +72,12 @@ class pedidos(UserMixin, db.Model):
     order_start = db.Column(db.String(200))
     situation = db.Column(db.String(50))
     
-    def __init__(self, name_client, payment, delivery, note, amount, address, tel, order_time, order_start, situation):
+    def __init__(self, name_client, payment, delivery, note, sub_amount, amount, address, tel, order_time, order_start, situation):
         self.name_client = name_client
         self.payment = payment
         self.delivery = delivery
         self.note = note
+        self.sub_amount = sub_amount
         self.amount = amount
         self.address = address
         self.tel = tel
