@@ -3,12 +3,11 @@
 <br>
 <h3 style="text-align: center;">CARDÁPIO</h3>
 <hr>
-<div class="accordion" id="accordionPanelsStayOpenExample">
+<div class="accordion" id="accordionadd_produtoExample">
     <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <h2 class="accordion-header" id="add_produto-headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                aria-controls="panelsStayOpen-collapseOne">
+                data-bs-target="#add_produto-collapseOne" aria-expanded="true" aria-controls="add_produto-collapseOne">
                 <h5 class="text-center"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15"
                         viewBox="0 0 35 35">
                         <path fill-rule="evenodd"
@@ -17,77 +16,164 @@
                     </svg>ADICIONAR</h5>
             </button>
         </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
-            aria-labelledby="panelsStayOpen-headingOne">
+        <div id="add_produto-collapseOne" class="accordion-collapse collapse" aria-labelledby="add_produto-headingOne">
             <div class="accordion-body text-bg-dark">
-                <div class="d-flex">
-                    <form class="row g-3 text-bg-dark pb-3 rounded m-1" action="/painel/cardapio/add/1"
-                        method="POST" enctype="multipart/form-data">
-                        <h4 class="text-center">MONTAR PRODUTO</h4>
-                        <hr>
-                        <div class="col-md-10">
-                            <label for="title" class="form-label">Titulo</label>
-                            <input type="text" class="form-control form-control-sm" id="title" name="title" required>
+                <form class="row g-3 text-bg-dark pb-3 rounded m-1" action="/painel/cardapio/add/1" method="POST"
+                    enctype="multipart/form-data">
+                    <h4 class="text-center">MONTAR PRODUTO</h4>
+                    <button type="button" class="btn btn-primary btn-sm col-md-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Cadastrar itens
+                    </button>
+                    <hr>
+                    <div class="d-flex">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <label for="titulo" class="form-label">Titulo</label>
+                                <input type="text" class="form-control form-control-sm" id="titulo" name="titulo"
+                                    required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="valor_venda" class="form-label">Valor</label>
+                                <input type="number" class="form-control form-control-sm" id="valor_venda"
+                                    name="valor_venda" min="1" step="0.01" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <textarea class="form-control form-control-sm" id="descricao" rows="2" name="descricao"
+                                    required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="file">Imagem</label>
+                                <input type="file" class="form-control form-control-sm" id="file" autocomplete="off"
+                                    name="file">
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <label for="amount" class="form-label">Valor</label>
-                            <input type="number" class="form-control form-control-sm" id="amount" name="amount" min="1"
-                                step="0.01" required>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="description" class="form-label">Descrição</label>
-                            <textarea class="form-control form-control-sm" id="description" rows="3" name="description"
-                                required></textarea>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
-                        </div>
-                        <div class="col-8">
-                            <input type="file" class="form-control form-control-sm" id="file" autocomplete="off"
-                                name="file">
-                        </div>
-                    </form>
 
-                    <form class="row g-3 text-bg-dark pb-3 rounded m-1" action="/painel/cardapio/adicionais/1"
-                        method="POST">
-                        <h4 class="text-center">ADICIONAL</h4>
-                        <hr>
-                        <div class="col-9">
-                            <label for="title" class="form-label">Titulo</label>
-                            <input type="text" class="form-control form-control-sm" id="title" name="title" required>
-                        </div>
+                        <div class="accordion accordion-flush col-md-6 m-3 rounded" id="accordionFlushExample">
+                            <label for="accordionFlushExample">Itens</label>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        Carnes
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-bg-dark">
+                                        <input type="checkbox" name="hamburguer" id="hamburguer"> Hamburguer
+                                        <input type="checkbox" name="lombo" id="lombo"> Lombo
+                                        <input type="checkbox" name="frango" id="frango"> Frango
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                        Saladas
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-bg-dark">
+                                        <input type="checkbox" name="tomate" id="tomate"> Tomate
+                                        <input type="checkbox" name="alface" id="alface"> Alface
+                                        <input type="checkbox" name="tomate" id="tomate"> Milho
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
+                                        Queijos
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-bg-dark">
+                                        <input type="checkbox" name="tomate" id="tomate"> Cheddar
+                                        <input type="checkbox" name="alface" id="alface"> Mussarela
+                                        <input type="checkbox" name="alface" id="alface"> Catupiry
+                                        <input type="checkbox" name="alface" id="alface"> Parmesão
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingQuarto">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseQuarto" aria-expanded="false"
+                                        aria-controls="flush-collapseQuarto">
+                                        Molhos
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseQuarto" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingQuarto" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-bg-dark">
+                                        <input type="checkbox" name="alface" id="alface"> Mostarda
+                                        <input type="checkbox" name="alface" id="alface"> Ketchupp
+                                        <input type="checkbox" name="alface" id="alface"> Maionese
+                                        <input type="checkbox" name="alface" id="alface"> Barbacue
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="col-3">
-                            <label for="amount" class="form-label">Valor</label>
-                            <input type="number" class="form-control form-control-sm" id="amount" name="amount" min="1"
-                                step="0.01" required>
                         </div>
-                        <div class="col-12">
-                            <input type="hidden">
-                        </div>
-                        <div class="col-12">
-                            <input type="hidden">
-                        </div>
-                        <div class="col-12">
-                            <input type="hidden">
-                        </div>
-                        <div class="col-12">
-                            <input type="hidden">
-                        </div>
-                        <div class="col-12">
-                            <input type="hidden">
-                        </div>
-                        <br>
-                        <br>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content  text-bg-dark">
+            <div class="modal-body">
+                <form class="row g-3 pb-3 rounded m-1" action="/painel/cardapio/adicionais/1" method="POST">
+                    <h4 class="text-center">ADICIONAR ITENS</h4>
+                    <hr>
+                    <div class="col-12">
+                        <label for="titulo" class="form-label">Titulo</label>
+                        <input type="text" class="form-control form-control-sm" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="valor_venda" class="form-label">Valor Venda</label>
+                        <input type="number" class="form-control form-control-sm" id="valor_venda" name="valor_venda"
+                            min="1" step="0.01" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="valor_custo" class="form-label">Valor Custo</label>
+                        <input type="number" class="form-control form-control-sm" id="valor_custo" name="valor_custo"
+                            min="1" step="0.01" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="file">Imagem</label>
+                        <input type="file" class="form-control form-control-sm" id="file" autocomplete="off"
+                            name="file">
+                    </div>
+                    <hr>
+                    <div class="col-12">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Voltar</button>
+                        <a href="" class="btn btn-primary btn-sm">Editar todos</a>
+                        <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <br>
 <div class="row row-cols-1 row-cols-md-4 g-3">
     {% for produto in allProdutos %}
@@ -96,7 +182,7 @@
             <img src="../static/img/{{ produto.picture }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <form action="/painel/cardapio/cancel/{{produto.id}}" method="POST">
-                    <h5 class="card-title font-monospace">{{ produto.title }}</h5>
+                    <h5 class="card-title font-monospace">{{ produto.titulo }}</h5>
                     <p class="card-text overflow-auto over" style="height: 80px;">{{ produto.description }}</p>
                     <h5 class="font-monospace">R$ {{ produto.amount }}</h5>
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
@@ -104,7 +190,7 @@
                         Editar
                     </button>
                     <button type="submit" class="btn btn-danger btn-sm"
-                        onclick="return confirm('Deseja cancelar o produto {{produto.title}}?')">Cancelar</button>
+                        onclick="return confirm('Deseja cancelar o produto {{produto.titulo}}?')">Cancelar</button>
                 </form>
             </div>
         </div>
@@ -114,11 +200,10 @@
         <div class="modal-dialog">
             <div class="modal-content text-bg-dark">
                 <div class="modal-header d-block text-center">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editando: {{ produto.title }}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editando: {{ produto.titulo }}</h1>
                 </div>
                 <div class="modal-body">
-                    <form action="/painel/cardapio/edit/{{produto.id}}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="/painel/cardapio/edit/{{produto.id}}" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <input type="image" src="../static/img/{{ produto.picture }}"
@@ -126,8 +211,8 @@
                             </div>
                             <div class="col-md-8">
                                 <label for="title">Titulo</label>
-                                <input type="text" class="form-control form-control-sm" id="title" name="title"
-                                    value="{{ produto.title }}" required>
+                                <input type="text" class="form-control form-control-sm" id="titulo" name="titulo"
+                                    value="{{ produto.titulo }}" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="amount">Valor</label>
@@ -150,7 +235,7 @@
                             <button type="button" class="btn btn-secondary btn-sm"
                                 data-bs-dismiss="modal">Voltar</button>
                             <button type="submit" class="btn btn-success btn-sm"
-                                onclick="return confirm('Deseja atualizar o produto {{produto.title}}?')">Atualizar</button>
+                                onclick="return confirm('Deseja atualizar o produto {{produto.titulo}}?')">Atualizar</button>
                         </div>
                     </form>
                 </div>

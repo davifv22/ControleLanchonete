@@ -2,46 +2,46 @@ from app import *
 
 
 def prepare(id):
-    situation = "EM ANDAMENTO"
-    order_start = datetime.now().strftime('%d-%m-%H %H:%M:%S')
+    situacao = "EM ANDAMENTO"
+    dt_incio = datetime.now().strftime('%d-%m-%H %H:%M:%S')
     pedidos.query.filter_by(id=id).update(
-        {"order_start": order_start, "situation": situation})
+        {"dt_incio": dt_incio, "situacao": situacao})
     return True
 
 
 def deliver(id):
     delivery = pedidos.query.filter_by(id=id).first()
     if delivery.delivery == 'ENTREGA':
-        situation = "EM ENTREGA"
+        situacao = "EM ENTREGA"
         pedidos.query.filter_by(id=id).update(
-            {"situation": situation})
+            {"situacao": situacao})
     else:
-        situation = "RETIRAR"
+        situacao = "RETIRAR"
         pedidos.query.filter_by(id=id).update(
-            {"situation": situation})
+            {"situacao": situacao})
     return True
 
 
 def finalize(id):
-    situation = "FINALIZADO"
+    situacao = "FINALIZADO"
     pedidos.query.filter_by(id=id).update(
-        {"situation": situation})
+        {"situacao": situacao})
     return True
 
 
 def cancel(id):
-    situation = "CANCELADO"
+    situacao = "CANCELADO"
     pedidos.query.filter_by(id=id).update(
-        {"situation": situation})
+        {"situacao": situacao})
     return True
 
 def update(id):
-    name_client = request.form['name_client']
-    payment = request.form['payment']
-    address = request.form['address']
-    delivery = request.form['delivery']
+    nome_cliente = request.form['nome_cliente']
+    pagamento = request.form['pagamento']
+    endereco = request.form['endereco']
+    tipo_entrega = request.form['delivery']
     tel = request.form['tel']
-    note = request.form['note']
+    observacao = request.form['note']
     pedidos.query.filter_by(id=id).update(
-    {"name_client": name_client, "payment": payment, "address": address, "delivery": delivery, "tel": tel, "note": note})
+    {"nome_cliente": nome_cliente, "pagamento": pagamento, "endereco": endereco, "tipo_entrega": tipo_entrega, "tel": tel, "observacao": observacao})
     return True

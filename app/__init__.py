@@ -44,116 +44,22 @@ def get(user):
 class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user = db.Column(db.String(10))
-    name = db.Column(db.String(50))
+    nome = db.Column(db.String(50))
     email = db.Column(db.String(100))
-    password = db.Column(db.String(200))
-    dt_create = db.Column(db.DATETIME)
-    situation = db.Column(db.String(50))
+    senha = db.Column(db.String(200))
+    administrador = db.Column(db.String(20))
+    situacao = db.Column(db.String(20))
+    dt_criacao = db.Column(db.DATETIME)
     
-    def __init__(self, user, name, email, password, dt_create, situation):
+    def __init__(self, user, nome, email, senha, administrador, situacao, dt_criacao):
         self.user = user
-        self.name = name
+        self.nome = nome
         self.email = email
-        self.password = password
-        self.dt_create = dt_create
-        self.situation = situation
+        self.senha = senha
+        self.administrador = administrador
+        self.situacao = situacao
+        self.dt_criacao = dt_criacao
 
-class pedidos(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name_client = db.Column(db.String(100))
-    payment = db.Column(db.String(100))
-    delivery = db.Column(db.String(100))
-    note = db.Column(db.String(200))
-    sub_amount = db.Column(db.String(100))
-    amount = db.Column(db.String(100))
-    address = db.Column(db.String(100))
-    tel = db.Column(db.String(200))
-    order_time = db.Column(db.String(200))
-    order_start = db.Column(db.String(200))
-    situation = db.Column(db.String(50))
-    
-    def __init__(self, name_client, payment, delivery, note, sub_amount, amount, address, tel, order_time, order_start, situation):
-        self.name_client = name_client
-        self.payment = payment
-        self.delivery = delivery
-        self.note = note
-        self.sub_amount = sub_amount
-        self.amount = amount
-        self.address = address
-        self.tel = tel
-        self.order_time = order_time
-        self.order_start = order_start
-        self.situation = situation
-        
-class pedidos_items(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_pedido = db.Column(db.Integer)
-    product_name = db.Column(db.String(100))
-    additional = db.Column(db.String(100))
-    note = db.Column(db.String(100))
-    amount = db.Column(db.String(100))
-    situation = db.Column(db.String(50))
-    
-    def __init__(self, id_pedido, product_name, additional, note, amount, situation):
-        self.id_pedido = id_pedido
-        self.product_name = product_name
-        self.additional = additional
-        self.note = note
-        self.amount = amount
-        self.situation = situation
-
-class cadempresa(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    company_name = db.Column(db.String(100))
-    corporate_name = db.Column(db.String(100))
-    address = db.Column(db.String(100))
-    district = db.Column(db.String(200))
-    city = db.Column(db.String(200))
-    cep = db.Column(db.String(50))
-    email = db.Column(db.String(50))
-    tel = db.Column(db.String(50))
-    cnpj = db.Column(db.String(50))
-    dt_create = db.Column(db.DATETIME)
-    
-    def __init__(self, company_name, corporate_name, address, district, city, cep, email, tel, cnpj, dt_create):
-        self.company_name = company_name
-        self.corporate_name = corporate_name
-        self.address = address
-        self.district = district
-        self.city = city
-        self.cep = cep
-        self.email = email
-        self.tel = tel
-        self.cnpj = cnpj
-        self.dt_create = dt_create
-
-class produtos(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(50))
-    amount = db.Column(db.String(50))
-    description = db.Column(db.String(200))
-    picture = db.Column(db.String(200))
-    situation = db.Column(db.String(50))
-    
-    def __init__(self, title, amount, description, picture, situation):
-        self.title = title
-        self.amount = amount
-        self.description = description
-        self.picture = picture
-        self.situation = situation
-
-    
-class adicionais(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(50))
-    amount = db.Column(db.String(50))
-    situation = db.Column(db.String(50))
-    
-    def __init__(self, title, amount, situation):
-        self.title = title
-        self.amount = amount
-        self.situation = situation
-        
 
 class controle(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -165,27 +71,138 @@ class controle(UserMixin, db.Model):
         self.dt_ref = dt_ref
 
 
+class cadempresa(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome_empresa = db.Column(db.String(100))
+    razao_social = db.Column(db.String(100))
+    endereco = db.Column(db.String(100))
+    bairro = db.Column(db.String(200))
+    cidade = db.Column(db.String(50))
+    cep = db.Column(db.String(20))
+    email = db.Column(db.String(50))
+    tel = db.Column(db.String(20))
+    cnpj = db.Column(db.String(20))
+    dt_criacao = db.Column(db.DATETIME)
+    
+    def __init__(self, nome_empresa, razao_social, endereco, bairro, cidade, cep, email, tel, cnpj, dt_criacao):
+        self.nome_empresa = nome_empresa
+        self.razao_social = razao_social
+        self.endereco = endereco
+        self.bairro = bairro
+        self.cidade = cidade
+        self.cep = cep
+        self.email = email
+        self.tel = tel
+        self.cnpj = cnpj
+        self.dt_criacao = dt_criacao
+
+
+class produtos(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    titulo = db.Column(db.String(100))
+    valor_custo = db.Column(db.String(20))
+    valor_venda = db.Column(db.String(20))
+    descricao = db.Column(db.String(400))
+    foto = db.Column(db.String(50))
+    itens = db.Column(db.String(50))
+    situacao = db.Column(db.String(10))
+    
+    
+    def __init__(self, titulo, valor_custo, valor_venda, descricao, foto, itens, situacao):
+        self.titulo = titulo
+        self.valor_custo = valor_custo
+        self.valor_venda = valor_venda
+        self.descricao = descricao
+        self.foto = foto
+        self.itens = itens
+        self.situacao = situacao
+        
+class produtos_itens(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome = db.Column(db.String(100))
+    valor_custo = db.Column(db.String(20))
+    valor_venda = db.Column(db.String(20))
+    foto = db.Column(db.String(50))
+    situacao = db.Column(db.String(20))
+    
+    def __init__(self, nome, valor_custo, valor_venda, foto, situacao):
+        self.nome = nome
+        self.valor_custo = valor_custo
+        self.valor_venda = valor_venda
+        self.foto = foto
+        self.situacao = situacao
+        
+class pedidos(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome_cliente = db.Column(db.String(100))
+    sub_total = db.Column(db.String(100))
+    tipo_entrega = db.Column(db.String(100))
+    total = db.Column(db.String(200))
+    total_itens = db.Column(db.String(100))
+    observacao = db.Column(db.String(200))
+    pagamento = db.Column(db.String(100))
+    endereco = db.Column(db.String(100))
+    tel = db.Column(db.String(200))
+    dt_pedido = db.Column(db.String(200))
+    dt_inicio = db.Column(db.String(200))
+    dt_concluido = db.Column(db.String(50))
+    situacao = db.Column(db.String(50))
+    
+    def __init__(self, nome_cliente, sub_total, tipo_entrega, total, total_itens, observacao, pagamento, endereco, tel, dt_pedido, dt_inicio, dt_concluido, situacao):
+        self.nome_cliente = nome_cliente
+        self.sub_total = sub_total
+        self.tipo_entrega = tipo_entrega
+        self.total = total
+        self.total_itens = total_itens
+        self.observacao = observacao
+        self.pagamento = pagamento
+        self.endereco = endereco
+        self.tel = tel
+        self.dt_pedido = dt_pedido
+        self.dt_inicio = dt_inicio
+        self.dt_concluido = dt_concluido
+        self.situacao = situacao
+        
+class pedidos_itens(UserMixin, db.Model):
+    id_pedido = db.Column(db.Integer, primary_key=True)
+    id_item = db.Column(db.Integer)
+    nome_item = db.Column(db.String(100))
+    tipo = db.Column(db.String(100))
+    valor = db.Column(db.String(100))
+    observacao = db.Column(db.String(100))
+    situacao = db.Column(db.String(50))
+    
+    def __init__(self, id_pedido, product_name, additional, note, amount, situacao):
+        self.id_pedido = id_pedido
+        self.product_name = product_name
+        self.additional = additional
+        self.note = note
+        self.amount = amount
+        self.situacao = situacao
+
+
 # FUNÇÕES GLOBAIS
 def load_menu():
     empresa = cadempresa.query.filter_by(id=1).first()
     if empresa is None:
-        company_name = 'NOME EMPRESA'
+        nome_empresa = 'NOME EMPRESA'
     else:
-        company_name = empresa.company_name
-    username = current_user.name
-    badgeOrder = pedidos.query.filter_by(situation='PENDENTE').all()
-    return username, company_name, len(badgeOrder)
+        nome_empresa = empresa.nome_empresa
+    nome = current_user.nome
+    badgeOrder = pedidos.query.filter_by(situacao='PENDENTE').all()
+    return nome, nome_empresa, len(badgeOrder)
 
 
 def load_values_panel():
     # debito
-    debito = db.session.query(db.func.sum(controle.debito)).scalar()
+    if db.session.query(db.func.sum(controle.debito)).scalar() is None:
+        debito = 0
     
-    if db.session.query(db.func.sum(pedidos.amount)).filter(pedidos.situation == 'FINALIZADO').scalar() is None:
+    if db.session.query(db.func.sum(pedidos.total)).filter(pedidos.situacao == 'FINALIZADO').scalar() is None:
         faturamento = 0
     else:
         faturamento = db.session.query(
-            db.func.sum(pedidos.amount)).filter(pedidos.situation == 'FINALIZADO').scalar()
+            db.func.sum(pedidos.total)).filter(pedidos.situacao == 'FINALIZADO').scalar()
         
     # if db.session.query(db.func.sum(compras.valor_total)).scalar() is None:
     despesas = -875.00

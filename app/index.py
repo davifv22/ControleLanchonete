@@ -6,29 +6,30 @@ bp = Blueprint('index', __name__)
 def load_menu_index():
     empresa = cadempresa.query.filter_by(id=1).first()
     if empresa is None:
-        company_name = 'NOME EMPRESA'
+        nome_empresa = 'NOME EMPRESA'
     else:
-        company_name = empresa.company_name
-    return company_name
+        nome_empresa = empresa.nome_empresa
+    return nome_empresa
 
 
 @bp.route('/', methods=['POST', 'GET'])
 def index_():
     if request.method == 'POST':
-        name_client = request.form['name_client']
-        delivery = request.form['delivery']
-        amount = request.form['amount']
-        payment = request.form['payment']
-        note = request.form['note']
-        address = request.form['address']
+        nome_cliente = request.form['nome_cliente']
+        sub_total = ''
+        tipo_entrega = request.form['tipo_entrega']
+        total = request.form['total']
+        total_itens = ''
+        pagamento = request.form['pagamento']
+        endereco = request.form['endereco']
         tel = request.form['tel']
-        order_time = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-        situation = 'PENDENTE'
-        add = pedidos(name_client=name_client, delivery=delivery, amount=amount, payment=payment, note=note,
-                      address=address, tel=tel, order_time=order_time, order_start='', situation=situation)
+        dt_pedido = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        add = pedidos(nome_cliente=nome_cliente, sub_total=sub_total, tipo_entrega=tipo_entrega, total=total, total_itens=total_itens,
+                      pagamento=pagamento, endereco=endereco, tel=tel, dt_pedido=dt_pedido, dt_inicio='', dt_concluido='', situacao='PENDENTE')
         db.session.add(add)
         db.session.commit()
         return redirect('/')
 
+    itens_disponiveis = ('1','2','3','4','5') #todos produtos disponiveis
     menu_panel = load_menu_index()
-    return render_template('index/index.html', menu_panel=menu_panel)
+    return render_template('index/index.html', menu_panel=menu_panel, itens_disponiveis=itens_disponiveis)

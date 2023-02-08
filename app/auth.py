@@ -6,15 +6,15 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 def login():
     if request.method == 'POST':
         user = request.form['user']
-        password = request.form['password']
-        user_ = users.query.filter_by(user=user).first()
+        senha = request.form['senha']
+        user_query = users.query.filter_by(user=user).first()
 
-        if user_ is None:
+        if user_query is None:
             #criar mensagem que usur nao existe
             return redirect('/auth/login')
 
-        if password == user_.password:
-            login_user(user_)
+        if senha == user_query.senha:
+            login_user(user_query)
             return redirect('/painel/home')
         else:
             # criar mensagem de senha ou usuario incorreto
@@ -27,12 +27,13 @@ def login():
 def register():
     if request.method == 'POST':
         user = request.form['user']
-        name = request.form['name']
+        nome = request.form['nome']
         email = request.form['email']
-        password = request.form['password']
-        dt_create = datetime.now()
-        situacao = 'A'
-        add = users(user=user,name=name,email=email,password=password,dt_create=dt_create,situacao=situacao)
+        senha = request.form['senha']
+        situacao = 'ATIVO'
+        administrador = 'SIM'
+        dt_criacao = datetime.now()
+        add = users(user=user,nome=nome,email=email,senha=senha,administrador=administrador,situacao=situacao, dt_criacao=dt_criacao)
         db.session.add(add)
         db.session.commit()
         user = users.query.filter_by(user=user).first()

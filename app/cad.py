@@ -6,23 +6,23 @@ bp = Blueprint('cad', __name__, url_prefix='/painel/cad')
 @login_required
 def empresa():
     if request.method == 'POST':
-        company_name = request.form['company_name']
-        corporate_name = request.form['corporate_name']
-        address = request.form['address']
-        district = request.form['district']
-        city = request.form['city']
+        nome_empresa = request.form['nome_empresa']
+        razao_social = request.form['razao_social']
+        endereco = request.form['endereco']
+        bairro = request.form['bairro']
+        cidade = request.form['cidade']
         cep = request.form['cep']
         email = request.form['email']
         tel = request.form['tel']
         cnpj = request.form['cnpj']
         if cadempresa.query.filter_by(id=1).first() is None:
-            dt_create = datetime.now()
-            add = cadempresa(company_name=company_name, corporate_name=corporate_name, address=address,
-                             district=district, city=city, cep=cep, email=email, tel=tel, cnpj=cnpj, dt_create=dt_create)
+            dt_criacao = datetime.now()
+            add = cadempresa(nome_empresa=nome_empresa, razao_social=razao_social, endereco=endereco,
+                             bairro=bairro, cidade=cidade, cep=cep, email=email, tel=tel, cnpj=cnpj, dt_criacao=dt_criacao)
             db.session.add(add)
         else:
-            cadempresa.query.filter_by(id=1).update({"company_name": company_name, "corporate_name": corporate_name,
-                                                     "address": address, "district": district, "city": city, "cep": cep, "email": email, "tel": tel, "cnpj": cnpj})
+            cadempresa.query.filter_by(id=1).update({"nome_empresa": nome_empresa, "razao_social": razao_social,
+                                                     "endereco": endereco, "bairro": bairro, "cidade": cidade, "cep": cep, "email": email, "tel": tel, "cnpj": cnpj})
         db.session.commit()
         return redirect('/painel/cad/empresa')
 

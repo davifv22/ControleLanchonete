@@ -50,42 +50,51 @@
     <form action="" method="post" class="text-bg-dark p-3 rounded">
         <!-- COLOCAR PARA ADICIONAR ITEM NA PROPRIA TELA E TIRAR CARRINHO -->
         <div class="mb-3">
-            <label for="name_client" class="form-label">Nome</label>
-            <input type="text" class="form-control form-control-sm" id="name_client" name="name_client" required>
+            <label for="nome_cliente" class="form-label">Nome</label>
+            <input type="text" class="form-control form-control-sm" id="nome_cliente" name="nome_cliente" required>
         </div>
         <div class="mb-3">
-            <label for="delivery" class="form-label">Frete</label>
-            <select class="form-select form-select-sm" aria-label="Default select example" id="delivery" name="delivery" required>
+            <label for="tipo_entrega" class="form-label">Frete</label>
+            <select class="form-select form-select-sm" aria-label="Default select example" id="tipo_entrega" name="tipo_entrega" required>
                 <option selected>...</option>
-                <option value="RETIRADA">Retirada</option>
-                <option value="ENTREGA">Entrega</option>
+                <option value="retirada">Retirada</option>
+                <option value="entrega">Entrega</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="amount" class="form-label">Total</label>
-            <input type="text" class="form-control form-control-sm" id="amount" name="amount" required>
+            <label for="sub_total" class="form-label">Total</label>
+            <input type="text" class="form-control form-control-sm" id="sub_total" name="sub_total" required>
         </div>
         <div class="mb-3">
-            <label for="payment" class="form-label">Pagamento</label>
-            <select class="form-select form-select-sm" aria-label="Default select example" id="payment" name="payment" required>
+            <label for="pagamento" class="form-label">Pagamento</label>
+            <select class="form-select form-select-sm" aria-label="Default select example" id="pagamento" name="pagamento" required>
                 <option selected>...</option>
-                <option value="DINHEIRO">DINHEIRO</option>
-                <option value="CARTAO DEBITO">CARTÃO DÉBITO</option>
-                <option value="CARTAO CREDITO">CARTÃO CRÉDITO</option>
-                <option value="VALE ALIMENTACAO">VALE ALIMENTAÇÃO</option>
+                <option value="dinheiro">DINHEIRO</option>
+                <option value="cartao debito">CARTÃO DÉBITO</option>
+                <option value="cartao credito">CARTÃO CRÉDITO</option>
+                <option value="vale alimentacao">VALE ALIMENTAÇÃO</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="address" class="form-label">Endereço</label>
-            <input type="text" class="form-control form-control-sm" id="address" name="address" required>
+            <label for="endereco" class="form-label">Endereço</label>
+            <input type="text" class="form-control form-control-sm" id="endereco" name="endereco" required>
+        </div>
+        <div class="mb-3">
+            <label for="itens" class="form-label">Itens</label>
+            <select class="form-select form-select-sm" aria-label="Default select example" id="itens" name="itens" required>
+                <option selected>...</option>
+                {% for item in itens_disponiveis  %}
+                <option value="{{item}}">{{item}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="mb-3">
             <label for="tel" class="form-label">Telefone</label>
             <input type="text" class="form-control form-control-sm" id="tel" name="tel" required>
         </div>
         <div class="mb-3">
-            <label for="note" class="form-label">Observação</label>
-            <textarea class="form-control form-control-sm" id="note" rows="2" name="note"></textarea>
+            <label for="observacao" class="form-label">Observação</label>
+            <textarea class="form-control form-control-sm" id="observacao" rows="2" name="observacao"></textarea>
           </div>
         <button type="submit" class="btn btn-primary btn-sm">Confirmar</button>
     </form>

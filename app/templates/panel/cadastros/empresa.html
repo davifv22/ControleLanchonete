@@ -6,27 +6,27 @@
 <br>
 <form class="row g-3 text-bg-dark pb-3 rounded" action="{{url_for('cad.empresa')}}" method="POST">
     <div class="col-md-6">
-        <label for="company_name" class="form-label">Nome empresa</label>
-        <input type="text" class="form-control form-control-sm" id="company_name" name="company_name"
-            value="{{cad_empresa.company_name}}" required>
+        <label for="nome_empresa" class="form-label">Nome empresa</label>
+        <input type="text" class="form-control form-control-sm" id="nome_empresa" name="nome_empresa"
+            value="{{cad_empresa.nome_empresa}}" required>
     </div>
     <div class="col-md-6">
-        <label for="corporate_name" class="form-label">Razão social</label>
-        <input type="text" class="form-control form-control-sm" id="corporate_name" name="corporate_name"
-            value="{{cad_empresa.corporate_name}}" required>
+        <label for="razao_social" class="form-label">Razão social</label>
+        <input type="text" class="form-control form-control-sm" id="razao_social" name="razao_social"
+            value="{{cad_empresa.razao_social}}" required>
     </div>
     <div class="col-6">
-        <label for="address" class="form-label">Endereço</label>
-        <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Rua tal, 00"
-            value="{{cad_empresa.address}}" required>
+        <label for="endereco" class="form-label">Endereço</label>
+        <input type="text" class="form-control form-control-sm" id="endereco" name="endereco" placeholder="Rua tal, 00"
+            value="{{cad_empresa.endereco}}" required>
     </div>
     <div class="col-2">
-        <label for="district" class="form-label">Bairro</label>
-        <input type="text" class="form-control form-control-sm" id="district" name="district" value="{{cad_empresa.district}}" required>
+        <label for="bairro" class="form-label">Bairro</label>
+        <input type="text" class="form-control form-control-sm" id="bairro" name="bairro" value="{{cad_empresa.bairro}}" required>
     </div>
     <div class="col-md-2">
-        <label for="city" class="form-label">Cidade</label>
-        <input type="text" class="form-control form-control-sm" id="city" name="city" value="{{cad_empresa.city}}" required>
+        <label for="cidade" class="form-label">Cidade</label>
+        <input type="text" class="form-control form-control-sm" id="cidade" name="cidade" value="{{cad_empresa.cidade}}" required>
     </div>
     <div class="col-md-2">
         <label for="cep" class="form-label">CEP</label>
@@ -45,8 +45,8 @@
         <input type="text" class="form-control form-control-sm" id="cnpj" name="cnpj" value="{{cad_empresa.cnpj}}" required>
     </div>
     <div class="col-md-3">
-        <label for="dt_create" class="form-label">Data implantação</label>
-        <input type="text" class="form-control form-control-sm" id="dt_create" name="dt_create" value="{{cad_empresa.dt_create}}"
+        <label for="dt_criacao" class="form-label">Data implantação</label>
+        <input type="text" class="form-control form-control-sm" id="dt_criacao" name="dt_criacao" value="{{cad_empresa.dt_criacao}}"
             disabled>
     </div>
     <div class="col-12">

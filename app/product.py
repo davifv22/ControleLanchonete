@@ -2,10 +2,12 @@ from app import *
 
 
 def add_produto():
-    title = request.form['title']
-    amount = request.form['amount']
-    situation = 'ATIVO'
-    description = request.form['description']
+    titulo = request.form['titulo']
+    valor_custo = '' # soma dos itens add
+    valor_venda = request.form['valor_venda']
+    descricao = request.form['descricao']
+    itens = []
+    situacao = 'ATIVO'
     file = request.files['file']
     if not file.filename == '':
         if upload_image(file):
@@ -17,38 +19,39 @@ def add_produto():
     else:
         filename = 'product-default.webp'
         flash('Imagem não encontrada, adicionamos uma padrão!')
-    produto = produtos(
-        title=title, amount=amount, description=description, picture=filename, situation=situation)
+    produto = produtos(titulo=titulo, valor_custo=valor_custo, valor_venda=valor_venda, descricao=descricao, foto=filename, itens=itens, situacao=situacao)
     db.session.add(produto)
     return True
 
 
 def edit_produto(id):
-    title = request.form['title']
-    amount = request.form['amount']
-    description = request.form['description']
+    titulo = request.form['titulo']
+    valor_venda = request.form['valor_venda']
+    descricao = request.form['descricao']
+    itens = ''
+    
     file = request.files['file']
     if not file.filename == '':
         if upload_image(file):
             filename = file.filename.replace(' ', '_')
             produtos.query.filter_by(id=id).update(
-                {"title": title, "amount": amount, "description": description, "picture": filename})
+                {"titulo": titulo, "valor_venda": valor_venda, "descricao": descricao, "itens": itens, "foto": filename})
         else:
             flash(
                 'Extensão não suportada, a imagem deve ser .png, .jpg, .jpeg ou .webp')
             return redirect('/painel/cardapio')
     else:
         produtos.query.filter_by(id=id).update(
-            {"title": title, "amount": amount, "description": description})
+            {"titulo": titulo, "valor_venda": valor_venda, "descricao": descricao, "itens": itens})
     return True
 
 
 def delete_produto(id):
-    situation = "CANCELADO"
+    situacao = "CANCELADO"
     produtos.query.filter_by(id=id).update(
-        {"situation": situation})
+        {"situacao": situacao})
     return True
 
 
-def addtional(id, case):
+def add_item(id, case):
     pass
