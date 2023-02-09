@@ -119,17 +119,17 @@ class produtos(UserMixin, db.Model):
         
 class produtos_itens(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome = db.Column(db.String(100))
+    titulo = db.Column(db.String(100))
+    tipo_item = db.Column(db.String(30))
     valor_custo = db.Column(db.String(20))
     valor_venda = db.Column(db.String(20))
-    foto = db.Column(db.String(50))
     situacao = db.Column(db.String(20))
     
-    def __init__(self, nome, valor_custo, valor_venda, foto, situacao):
-        self.nome = nome
+    def __init__(self, titulo, tipo_item, valor_custo, valor_venda, situacao):
+        self.titulo = titulo
+        self.tipo_item = tipo_item
         self.valor_custo = valor_custo
         self.valor_venda = valor_venda
-        self.foto = foto
         self.situacao = situacao
         
 class pedidos(UserMixin, db.Model):
@@ -143,8 +143,8 @@ class pedidos(UserMixin, db.Model):
     pagamento = db.Column(db.String(100))
     endereco = db.Column(db.String(100))
     tel = db.Column(db.String(200))
-    dt_pedido = db.Column(db.String(200))
-    dt_inicio = db.Column(db.String(200))
+    dt_pedido = db.Column(db.String(50))
+    dt_inicio = db.Column(db.String(50))
     dt_concluido = db.Column(db.String(50))
     situacao = db.Column(db.String(50))
     

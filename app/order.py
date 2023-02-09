@@ -3,9 +3,9 @@ from app import *
 
 def prepare(id):
     situacao = "EM ANDAMENTO"
-    dt_incio = datetime.now().strftime('%d-%m-%H %H:%M:%S')
+    dt_inicio = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
     pedidos.query.filter_by(id=id).update(
-        {"dt_incio": dt_incio, "situacao": situacao})
+        {"dt_inicio": dt_inicio, "situacao": situacao})
     return True
 
 
@@ -35,13 +35,14 @@ def cancel(id):
         {"situacao": situacao})
     return True
 
+
 def update(id):
     nome_cliente = request.form['nome_cliente']
     pagamento = request.form['pagamento']
     endereco = request.form['endereco']
-    tipo_entrega = request.form['delivery']
+    tipo_entrega = request.form['tipo_entrega']
     tel = request.form['tel']
-    observacao = request.form['note']
+    observacao = request.form['observacao']
     pedidos.query.filter_by(id=id).update(
-    {"nome_cliente": nome_cliente, "pagamento": pagamento, "endereco": endereco, "tipo_entrega": tipo_entrega, "tel": tel, "observacao": observacao})
+        {"nome_cliente": nome_cliente, "pagamento": pagamento, "endereco": endereco, "tipo_entrega": tipo_entrega, "tel": tel, "observacao": observacao})
     return True

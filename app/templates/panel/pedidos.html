@@ -9,21 +9,21 @@
         <thead>
             <tr>
                 <th colspan="3">
-                    <b>Cliente: {{ pedido.name_client }}</b> <br>
+                    <b>Cliente: {{ pedido.nome_cliente }}</b> <br>
                     Tel: {{ pedido.tel }} <br>
                     <b>Pedido: #{{ pedido.id }}</b> <br>
-                    Data: {{ pedido.order_time }}
+                    Data: {{ pedido.dt_pedido }}
                 </th>
             </tr>
             <tr>
                 <th class="ttu" colspan="3">
-                    {% if pedido.situation == 'PENDENTE' %}
+                    {% if pedido.situacao == 'PENDENTE' %}
                     <b class="situacao bg-danger">PENDENTE</b>
-                    {% elif pedido.situation == 'EM ANDAMENTO' %}
+                    {% elif pedido.situacao == 'EM ANDAMENTO' %}
                     <b class="situacao bg-secondary">EM ANDAMENTO</b>
-                    {% elif pedido.situation == 'EM ENTREGA' %}
+                    {% elif pedido.situacao == 'EM ENTREGA' %}
                     <b class="situacao bg-success">EM ENTREGA</b>
-                    {% elif pedido.situation == 'RETIRAR' %}
+                    {% elif pedido.situacao == 'RETIRAR' %}
                     <b class="situacao bg-success">À RETIRAR</b>
                     {% endif %}
                 </th>
@@ -31,15 +31,15 @@
         </thead>
         <tbody>
             <tr class="top">
-                <td colspan="3">Endereço: {{ pedido.address }}</td>
+                <td colspan="3">Endereço: {{ pedido.endereco }}</td>
             </tr>
             <tr>
-                <td colspan="3">Pagamento: {{ pedido.payment }}</td>
+                <td colspan="3">Pagamento: {{ pedido.pagamento }}</td>
             </tr>
             <tr>
                 <td>Total itens:</td>
                 <td>5.0</td>
-                <td>R$ {{ pedido.sub_amount }}</td>
+                <td>R$ {{ pedido.sub_total }}</td>
             </tr>
         </tbody>
         <tfoot>
@@ -50,9 +50,9 @@
             </tr>
             <tr class="ttu">
                 <td colspan="2">Sub-total</td>
-                <td align="right">R$ {{ pedido.sub_amount }}</td>
+                <td align="right">R$ {{ pedido.sub_total }}</td>
             </tr>
-            {% if pedido.delivery == 'ENTREGA' %}
+            {% if pedido.tipo_entrega == 'ENTREGA' %}
             <tr class="ttu">
                 <td colspan="2">Entrega</td>
                 <td align="right">R$ 4,60</td>
@@ -65,25 +65,25 @@
             {% endif %}
             <tr class="ttu">
                 <td colspan="2">Total</td>
-                <td align="right">R$ {{ pedido.amount }}</td>
+                <td align="right">R$ {{ pedido.total }}</td>
             </tr>
 
             <tr class="sup">
                 <td colspan="3" align="center">
                     <div class="d-flex justify-content-center">
-                        {% if pedido.situation == 'PENDENTE' %}
+                        {% if pedido.situacao == 'PENDENTE' %}
                         <form action="pedido/{{pedido.id}}/prepare" method="POST">
                             <button class="btn btn-success btn-sm m-1">Preparar</button>
                         </form>
-                        {% elif pedido.situation == 'EM ANDAMENTO' %}
+                        {% elif pedido.situacao == 'EM ANDAMENTO' %}
                         <form action="pedido/{{pedido.id}}/deliver" method="POST">
                             <button class="btn btn-success btn-sm m-1">Entregar</button>
                         </form>
-                        {% elif pedido.situation == 'EM ENTREGA' %}
+                        {% elif pedido.situacao == 'EM ENTREGA' %}
                         <form action="pedido/{{pedido.id}}/finalize" method="POST">
                             <button class="btn btn-success btn-sm m-1">Entregue</button>
                         </form>
-                        {% elif pedido.situation == 'RETIRAR' %}
+                        {% elif pedido.situacao == 'RETIRAR' %}
                         <form action="pedido/{{pedido.id}}/finalize" method="POST">
                             <button class="btn btn-success btn-sm m-1">Retirado</button>
                         </form>
@@ -106,13 +106,13 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Pedido: #{{ pedido.id }}</h1>
                     <br>
                     <h6 class="ttu">
-                        {% if pedido.situation == 'PENDENTE' %}
+                        {% if pedido.situacao == 'PENDENTE' %}
                         <b class="situacao bg-danger">PENDENTE</b>
-                        {% elif pedido.situation == 'EM ANDAMENTO' %}
+                        {% elif pedido.situacao == 'EM ANDAMENTO' %}
                         <b class="situacao bg-secondary">EM ANDAMENTO</b>
-                        {% elif pedido.situation == 'EM ENTREGA' %}
+                        {% elif pedido.situacao == 'EM ENTREGA' %}
                         <b class="situacao bg-success">EM ENTREGA</b>
-                        {% elif pedido.situation == 'RETIRAR' %}
+                        {% elif pedido.situacao == 'RETIRAR' %}
                         <b class="situacao bg-success">À RETIRAR</b>
                         {% endif %}
                     </h6>
@@ -121,15 +121,15 @@
                     <form action="pedido/{{pedido.id}}/update" method="POST">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="name_client">Nome cliente</label>
-                                <input type="text" class="form-control form-control-sm" id="name_client"
-                                    name="name_client" value="{{ pedido.name_client }}" required>
+                                <label for="nome_cliente">Nome cliente</label>
+                                <input type="text" class="form-control form-control-sm" id="nome_cliente"
+                                    name="nome_cliente" value="{{ pedido.nome_cliente }}" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="payment">Pagamento</label>
-                                <select class="form-select form-select-sm" name="payment" id="payment"
+                                <label for="pagamento">Pagamento</label>
+                                <select class="form-select form-select-sm" name="pagamento" id="pagamento"
                                     aria-label=".form-select-sm example" required>
-                                    <option value="{{ pedido.payment }}">{{ pedido.payment }}</option>
+                                    <option value="{{ pedido.pagamento }}">{{ pedido.pagamento }}</option>
                                     <option value="DINHEIRO">Dinheiro</option>
                                     <option value="CARTAO DEBITO">Cartão Débito</option>
                                     <option value="CARTAO CREDITO">Cartão Crédito</option>
@@ -138,15 +138,15 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="address">Endereço</label>
-                                <input type="text" class="form-control form-control-sm" id="address" name="address"
-                                    value="{{ pedido.address }}" required>
+                                <label for="endereco">Endereço</label>
+                                <input type="text" class="form-control form-control-sm" id="endereco" name="endereco"
+                                    value="{{ pedido.endereco }}" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="delivery">Frete</label>
-                                <select class="form-select form-select-sm" name="delivery" id="delivery"
+                                <label for="tipo_entrega">Frete</label>
+                                <select class="form-select form-select-sm" name="tipo_entrega" id="tipo_entrega"
                                     aria-label=".form-select-sm example" required>
-                                    <option value="{{ pedido.delivery }}">{{ pedido.delivery }}</option>
+                                    <option value="{{ pedido.tipo_entrega }}">{{ pedido.tipo_entrega }}</option>
                                     <option value="ENTREGA">Entrega</option>
                                     <option value="RETIRADA">Retirada</option>
                                 </select>
@@ -157,24 +157,24 @@
                                     value="{{ pedido.tel }}" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="amount">Total</label>
-                                <input type="text" class="form-control form-control-sm" id="amount" name="amount"
-                                    value="{{ pedido.amount }}" disabled>
+                                <label for="total">Total</label>
+                                <input type="text" class="form-control form-control-sm" id="total" name="total"
+                                    value="{{ pedido.total }}" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label for="order_time">Horário do Pedido</label>
-                                <input type="text" class="form-control form-control-sm" id="order_time"
-                                    name="order_time" value="{{ pedido.order_time }}" disabled>
+                                <label for="dt_pedido">Horário do Pedido</label>
+                                <input type="text" class="form-control form-control-sm" id="dt_pedido"
+                                    name="dt_pedido" value="{{ pedido.dt_pedido }}" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label for="order_start">Pedido Iniciado</label>
-                                <input type="text" class="form-control form-control-sm" id="order_start"
-                                    name="order_start" value="{{ pedido.order_start }}" disabled>
+                                <label for="dt_inicio">Pedido Iniciado</label>
+                                <input type="text" class="form-control form-control-sm" id="dt_inicio"
+                                    name="dt_inicio" value="{{ pedido.dt_inicio }}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label for="note">Observação</label>
-                                <textarea class="form-control form-control-sm" id="note" name="note"
-                                    rows="1">{{ pedido.note }}</textarea>
+                                <label for="observacao">Observação</label>
+                                <textarea class="form-control form-control-sm" id="observacao" name="observacao"
+                                    rows="1">{{ pedido.observacao }}</textarea>
                             </div>
 
                             <table class="table text-bg-dark text-center">

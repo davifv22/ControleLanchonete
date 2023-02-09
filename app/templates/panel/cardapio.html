@@ -3,9 +3,9 @@
 <br>
 <h3 style="text-align: center;">CARDÁPIO</h3>
 <hr>
-<div class="accordion" id="accordionadd_produtoExample">
+<div class="accordion" id="add_produto">
     <div class="accordion-item">
-        <h2 class="accordion-header" id="add_produto-headingOne">
+        <h2 class="accordion-header" id="add_produto">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#add_produto-collapseOne" aria-expanded="true" aria-controls="add_produto-collapseOne">
                 <h5 class="text-center"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15"
@@ -16,13 +16,13 @@
                     </svg>ADICIONAR</h5>
             </button>
         </h2>
-        <div id="add_produto-collapseOne" class="accordion-collapse collapse" aria-labelledby="add_produto-headingOne">
+        <div id="add_produto-collapseOne" class="accordion-collapse collapse" aria-labelledby="add_produto">
             <div class="accordion-body text-bg-dark">
                 <form class="row g-3 text-bg-dark pb-3 rounded m-1" action="/painel/cardapio/add/1" method="POST"
                     enctype="multipart/form-data">
                     <h4 class="text-center">MONTAR PRODUTO</h4>
                     <button type="button" class="btn btn-primary btn-sm col-md-2" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
+                        data-bs-target="#cad-itens">
                         Cadastrar itens
                     </button>
                     <hr>
@@ -54,79 +54,80 @@
                             </div>
                         </div>
 
-                        <div class="accordion accordion-flush col-md-6 m-3 rounded" id="accordionFlushExample">
-                            <label for="accordionFlushExample">Itens</label>
+                        <div class="accordion accordion-flush col-md-6 m-1 p-1" id="select-itens">
+                            <label for="select-itens mb-1">Itens</label>
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
+                                <h2 class="accordion-header" id="select-itens-headingOne">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                        aria-controls="flush-collapseOne">
+                                        data-bs-target="#select-itens-collapseOne" aria-expanded="false"
+                                        aria-controls="select-itens-collapseOne">
                                         Carnes
                                     </button>
                                 </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div id="select-itens-collapseOne" class="accordion-collapse collapse"
+                                    aria-labelledby="select-itens-headingOne" data-bs-parent="#select-itens">
                                     <div class="accordion-body text-bg-dark">
-                                        <input type="checkbox" name="hamburguer" id="hamburguer"> Hamburguer
-                                        <input type="checkbox" name="lombo" id="lombo"> Lombo
-                                        <input type="checkbox" name="frango" id="frango"> Frango
+                                        {% for Carnes in item_Carnes %}
+                                        <input type="checkbox" name="itens" id="itens" value="{{Carnes.titulo}}">
+                                        <label class="form-check-label" for="itens">{{Carnes.titulo}}</label>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo">
+                                <h2 class="accordion-header" id="select-itens-headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                        aria-controls="flush-collapseTwo">
+                                        data-bs-target="#select-itens-collapseTwo" aria-expanded="false"
+                                        aria-controls="select-itens-collapseTwo">
                                         Saladas
                                     </button>
                                 </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                <div id="select-itens-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="select-itens-headingTwo" data-bs-parent="#select-itens">
                                     <div class="accordion-body text-bg-dark">
-                                        <input type="checkbox" name="tomate" id="tomate"> Tomate
-                                        <input type="checkbox" name="alface" id="alface"> Alface
-                                        <input type="checkbox" name="tomate" id="tomate"> Milho
+                                        {% for Saladas in item_Saladas %}
+                                        <input type="checkbox" name="itens" id="itens" value="{{Saladas.titulo}}">
+                                        <label class="form-check-label" for="itens">{{Saladas.titulo}}</label>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree">
+                                <h2 class="accordion-header" id="select-itens-headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
-                                        aria-controls="flush-collapseThree">
+                                        data-bs-target="#select-itens-collapseThree" aria-expanded="false"
+                                        aria-controls="select-itens-collapseThree">
                                         Queijos
                                     </button>
                                 </h2>
-                                <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div id="select-itens-collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="select-itens-headingThree" data-bs-parent="#select-itens">
                                     <div class="accordion-body text-bg-dark">
-                                        <input type="checkbox" name="tomate" id="tomate"> Cheddar
-                                        <input type="checkbox" name="alface" id="alface"> Mussarela
-                                        <input type="checkbox" name="alface" id="alface"> Catupiry
-                                        <input type="checkbox" name="alface" id="alface"> Parmesão
+                                        {% for Queijos in item_Queijos %}
+                                        <input type="checkbox" name="itens" id="itens" value="{{Queijos.titulo}}">
+                                        <label class="form-check-label" for="itens">{{Queijos.titulo}}</label>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingQuarto">
+                                <h2 class="accordion-header" id="select-itens-headingQuarto">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseQuarto" aria-expanded="false"
-                                        aria-controls="flush-collapseQuarto">
+                                        data-bs-target="#select-itens-collapseQuarto" aria-expanded="false"
+                                        aria-controls="select-itens-collapseQuarto">
                                         Molhos
                                     </button>
                                 </h2>
-                                <div id="flush-collapseQuarto" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingQuarto" data-bs-parent="#accordionFlushExample">
+                                <div id="select-itens-collapseQuarto" class="accordion-collapse collapse"
+                                    aria-labelledby="select-itens-headingQuarto" data-bs-parent="#select-itens">
                                     <div class="accordion-body text-bg-dark">
-                                        <input type="checkbox" name="alface" id="alface"> Mostarda
-                                        <input type="checkbox" name="alface" id="alface"> Ketchupp
-                                        <input type="checkbox" name="alface" id="alface"> Maionese
-                                        <input type="checkbox" name="alface" id="alface"> Barbacue
+                                        {% for Molhos in item_Molhos %}
+                                        <input type="checkbox" name="itens" id="itens" value="{{Molhos.titulo}}">
+                                        <label class="form-check-label" for="itens">{{Molhos.titulo}}</label>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </form>
@@ -135,11 +136,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cad-itens" tabindex="-1" aria-labelledby="cad-itensLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content  text-bg-dark">
             <div class="modal-body">
-                <form class="row g-3 pb-3 rounded m-1" action="/painel/cardapio/adicionais/1" method="POST">
+                <form class="row g-3 pb-3 rounded m-1" action="/painel/cardapio/add_item/1" method="POST">
                     <h4 class="text-center">ADICIONAR ITENS</h4>
                     <hr>
                     <div class="col-12">
@@ -149,22 +150,28 @@
                     <div class="col-6">
                         <label for="valor_venda" class="form-label">Valor Venda</label>
                         <input type="number" class="form-control form-control-sm" id="valor_venda" name="valor_venda"
-                            min="1" step="0.01" required>
+                            min="0.01" step="0.01" required>
                     </div>
                     <div class="col-6">
                         <label for="valor_custo" class="form-label">Valor Custo</label>
                         <input type="number" class="form-control form-control-sm" id="valor_custo" name="valor_custo"
-                            min="1" step="0.01" required>
+                            min="0.01" step="0.01" required>
                     </div>
                     <div class="col-12">
-                        <label for="file">Imagem</label>
-                        <input type="file" class="form-control form-control-sm" id="file" autocomplete="off"
-                            name="file">
+                        <label for="file">Tipo</label>
+                        <select class="form-select form-select-sm" aria-label="Default select example" id="tipo_item"
+                            name="tipo_item" required>
+                            <option selected disabled>Escolha o tipo do item</option>
+                            <option value="Carnes">Carnes</option>
+                            <option value="Saladas">Saladas</option>
+                            <option value="Queijos">Queijos</option>
+                            <option value="Molhos">Molhos</option>
+                        </select>
                     </div>
                     <hr>
                     <div class="col-12">
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Voltar</button>
-                        <a href="" class="btn btn-primary btn-sm">Editar todos</a>
+                        <a href="" class="btn btn-primary btn-sm">Ver todos</a>
                         <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
                     </div>
                 </form>
@@ -179,12 +186,12 @@
     {% for produto in allProdutos %}
     <div class="col">
         <div class="card text-bg-dark">
-            <img src="../static/img/{{ produto.picture }}" class="card-img-top" alt="...">
+            <img src="../static/img/{{ produto.foto }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <form action="/painel/cardapio/cancel/{{produto.id}}" method="POST">
                     <h5 class="card-title font-monospace">{{ produto.titulo }}</h5>
-                    <p class="card-text overflow-auto over" style="height: 80px;">{{ produto.description }}</p>
-                    <h5 class="font-monospace">R$ {{ produto.amount }}</h5>
+                    <p class="card-text overflow-auto over" style="height: 80px;">{{ produto.descricao }}</p>
+                    <h5 class="font-monospace">R$ {{ produto.valor_venda }}</h5>
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                         data-bs-target="#{{ produto.id }}">
                         Editar
@@ -196,17 +203,17 @@
         </div>
     </div>
 
-    <div class="modal fade" id="{{ produto.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="{{ produto.id }}" tabindex="-1" aria-labelledby="edit-produtoLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content text-bg-dark">
                 <div class="modal-header d-block text-center">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editando: {{ produto.titulo }}</h1>
+                    <h1 class="modal-title fs-5" id="edit-produtoLabel">EDITANDO: {{ produto.titulo }}</h1>
                 </div>
                 <div class="modal-body">
                     <form action="/painel/cardapio/edit/{{produto.id}}" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-md-12">
-                                <input type="image" src="../static/img/{{ produto.picture }}"
+                                <input type="image" src="../static/img/{{ produto.foto }}"
                                     class="img-fluid rounded mx-auto d-block" alt="">
                             </div>
                             <div class="col-md-8">
@@ -214,15 +221,116 @@
                                 <input type="text" class="form-control form-control-sm" id="titulo" name="titulo"
                                     value="{{ produto.titulo }}" required>
                             </div>
-                            <div class="col-md-4">
-                                <label for="amount">Valor</label>
-                                <input type="text" class="form-control form-control-sm" id="amount" name="amount"
-                                    value="{{ produto.amount }}" required>
+                            <div class="col-md-2">
+                                <label for="valor_custo">Vr Custo</label>
+                                <input type="text" class="form-control form-control-sm" id="valor_custo"
+                                    name="valor_custo" value="{{ produto.valor_custo }}" disabled>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="valor_venda">Vr Venda</label>
+                                <input type="text" class="form-control form-control-sm" id="valor_venda"
+                                    name="valor_venda" value="{{ produto.valor_venda }}" min="1" step="0.01" required>
                             </div>
                             <div class="col-md-12">
-                                <label for="description">Observação</label>
-                                <textarea class="form-control form-control-sm" id="description" name="description"
-                                    rows="3">{{ produto.description }}</textarea>
+                                <label for="descricao">Observação</label>
+                                <textarea class="form-control form-control-sm" id="descricao" name="descricao"
+                                    rows="3">{{ produto.descricao }}</textarea>
+                            </div>
+                            
+                            <div class="accordion accordion-flush col-md-12" id="select-itens-edit">
+                                <label for="select-itens-edit mb-1">Itens</label>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="select-itens-edit-headingOne">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#select-itens-edit-collapseOne"
+                                            aria-expanded="false" aria-controls="select-itens-edit-collapseOne">
+                                            Carnes
+                                        </button>
+                                    </h2>
+                                    <div id="select-itens-edit-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="select-itens-edit-headingOne" data-bs-parent="#select-itens-edit">
+                                        <div class="accordion-body text-bg-dark">
+                                            {% for Carnes in item_Carnes %}
+                                            {% if Carnes.titulo in produto.itens %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Carnes.titulo}}"
+                                                checked>
+                                            {% else %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Carnes.titulo}}">
+                                            {% endif %}
+                                            <label class="form-check-label" for="itens">{{Carnes.titulo}}</label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="select-itens-edit-headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#select-itens-edit-collapseTwo"
+                                            aria-expanded="false" aria-controls="select-itens-edit-collapseTwo">
+                                            Saladas
+                                        </button>
+                                    </h2>
+                                    <div id="select-itens-edit-collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="select-itens-edit-headingTwo" data-bs-parent="#select-itens-edit">
+                                        <div class="accordion-body text-bg-dark">
+                                            {% for Saladas in item_Saladas %}
+                                            {% if Saladas.titulo in produto.itens %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Saladas.titulo}}"
+                                                checked>
+                                            {% else %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Saladas.titulo}}">
+                                            {% endif %}
+                                            <label class="form-check-label" for="itens">{{Saladas.titulo}}</label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="select-itens-edit-headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#select-itens-edit-collapseThree"
+                                            aria-expanded="false" aria-controls="select-itens-edit-collapseThree">
+                                            Queijos
+                                        </button>
+                                    </h2>
+                                    <div id="select-itens-edit-collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="select-itens-edit-headingThree" data-bs-parent="#select-itens-edit">
+                                        <div class="accordion-body text-bg-dark">
+                                            {% for Queijos in item_Queijos %}
+                                            {% if Queijos.titulo in produto.itens %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Queijos.titulo}}"
+                                                checked>
+                                            {% else %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Queijos.titulo}}">
+                                            {% endif %}
+                                            <label class="form-check-label" for="itens">{{Queijos.titulo}}</label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="select-itens-edit-headingQuarto">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#select-itens-edit-collapseQuarto"
+                                            aria-expanded="false" aria-controls="select-itens-edit-collapseQuarto">
+                                            Molhos
+                                        </button>
+                                    </h2>
+                                    <div id="select-itens-edit-collapseQuarto" class="accordion-collapse collapse"
+                                        aria-labelledby="select-itens-edit-headingQuarto" data-bs-parent="#select-itens-edit">
+                                        <div class="accordion-body text-bg-dark">
+                                            {% for Molhos in item_Molhos %}
+                                            {% if Molhos.titulo in produto.itens %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Molhos.titulo}}"
+                                                checked>
+                                            {% else %}
+                                            <input type="checkbox" name="itens" id="itens" value="{{Molhos.titulo}}">
+                                            {% endif %}
+                                            <label class="form-check-label" for="itens">{{Molhos.titulo}}</label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <label for="file">Imagem</label>

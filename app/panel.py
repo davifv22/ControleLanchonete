@@ -40,9 +40,9 @@ def pedidos_(id=None, case=None):
         pedidos.situacao != 'FINALIZADO', pedidos.situacao != 'CANCELADO').all()
     return render_template('panel/pedidos.html', menu_panel=menu_panel, all_pedidos=all_pedidos)
 
-#@bp.route('/cardapio/<case>/<int:id>', methods=['POST', 'GET'])
-@bp.route('/cardapio/<case>/<int:id>', methods=['POST', 'GET'])
-@bp.route('/cardapio', methods=['POST', 'GET'])
+
+@bp.route('/cardapio/<case>/<int:id>', methods=['POST'])
+@bp.route('/cardapio', methods=['GET'])
 @login_required
 def cardapio(id=None, case=None):
     if request.method == 'POST':
@@ -51,19 +51,30 @@ def cardapio(id=None, case=None):
         match case:
             case 'add_item':
                 if add_item() is True:
-                    flash(f'O adicional {titulo} foi adicionado com sucesso!')
+                    flash(f'O item {titulo} foi adicionado com sucesso!')
             case 'add':
                 if add_produto() is True:
                     flash(f'O produto {titulo} foi adicionado com sucesso!')
+                elif add_produto() is False:
+                    flash('Selecione um item!')
             case 'edit':
                 if edit_produto(id) is True:
                     flash(f'O produto {titulo} foi atualizado com sucesso!')
+                elif edit_produto(id) is False:
+                    flash('Selecione um item!')
             case 'cancel':
                 if delete_produto(id) is True:
                     flash(f'O produto foi cancelado com sucesso!')
         db.session.commit()
         return redirect('/painel/cardapio')
 
-    allProdutos = produtos.query.filter_by(situacao='ATIVO').all()
-    menu_panel = load_menu()
-    return render_template('panel/cardapio.html', menu_panel=menu_panel, allProdutos=allProdutos)
+    if request.method == 'GET':
+        allProdutos = produtos.query.filter_by(situacao='ATIVO').all()
+        item_Carnes = produtos_itens.query.filter_by(tipo_item='Carnes').all()
+        item_Saladas = produtos_itens.query.filter_by(
+            tipo_item='Saladas').all()
+        item_Queijos = produtos_itens.query.filter_by(
+            tipo_item='Queijos').all()
+        item_Molhos = produtos_itens.query.filter_by(tipo_item='Molhos').all()
+        menu_panel = load_menu()
+    return render_template('panel/cardapio.html', menu_panel=menu_panel, allProdutos=allProdutos, item_Carnes=item_Carnes, item_Saladas=item_Saladas, item_Queijos=item_Queijos, item_Molhos=item_Molhos)
