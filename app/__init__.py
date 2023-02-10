@@ -195,14 +195,14 @@ def load_menu():
 
 def load_values_panel():
     # debito
-    if db.session.query(db.func.sum(controle.debito)).scalar() is None:
+    debito = db.session.query(db.func.sum(controle.debito)).scalar()
+    if debito is None:
         debito = 0
     
-    if db.session.query(db.func.sum(pedidos.total)).filter(pedidos.situacao == 'FINALIZADO').scalar() is None:
+    faturamento = db.session.query(db.func.sum(pedidos.total)).filter(pedidos.situacao == 'FINALIZADO').scalar()
+    if faturamento is None:
         faturamento = 0
-    else:
-        faturamento = db.session.query(
-            db.func.sum(pedidos.total)).filter(pedidos.situacao == 'FINALIZADO').scalar()
+        
         
     # if db.session.query(db.func.sum(compras.valor_total)).scalar() is None:
     despesas = -875.00

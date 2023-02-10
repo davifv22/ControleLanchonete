@@ -10,8 +10,8 @@ def prepare(id):
 
 
 def deliver(id):
-    delivery = pedidos.query.filter_by(id=id).first()
-    if delivery.delivery == 'ENTREGA':
+    pedido = pedidos.query.filter_by(id=id).first()
+    if pedido.tipo_entrega == 'ENTREGA':
         situacao = "EM ENTREGA"
         pedidos.query.filter_by(id=id).update(
             {"situacao": situacao})
