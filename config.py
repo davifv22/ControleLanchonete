@@ -1,0 +1,9 @@
+USERNAME = 'root'
+PASSWORD = '12345'
+SERVER = 'localhost'
+DB = 'u110824153_dfvbanco'
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///banco.db'
+# SQLALCHEMY_DATABASE_URI = f'mysql://{USERNAME}:{PASSWORD}@{SERVER}/{DB}'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = 'random string'

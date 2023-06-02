@@ -6,7 +6,7 @@ def soma_itens_valor():
     itens = ''
     valor_custo = 0
     for item in itens_get:
-        valor_item = produtos_itens.query.filter_by(titulo=item).first()
+        valor_item = produtosModel.produtos_itens.query.filter_by(titulo=item).first()
         valor_custo = valor_custo + float(valor_item.valor_venda)
         if itens == '':
             itens = item
@@ -28,7 +28,7 @@ def add_produto():
     situacao = 'ATIVO'
     file = request.files.get('file')
     if not file.filename == '':
-        if upload_image(file):
+        if uploads.upload_image(file):
             filename = file.filename.replace(' ', '_')
         else:
             flash(
@@ -37,7 +37,7 @@ def add_produto():
     else:
         filename = 'product-default.webp'
         flash('Imagem não encontrada, adicionamos uma padrão!')
-    produto = produtos(titulo=titulo, valor_custo=itens_valor[1], valor_venda=valor_venda,
+    produto = produtosModel.produtos(titulo=titulo, valor_custo=itens_valor[1], valor_venda=valor_venda,
                        descricao=descricao, foto=filename, itens=itens_valor[0], situacao=situacao)
     db.session.add(produto)
     return True
@@ -55,23 +55,23 @@ def edit_produto(id):
 
     file = request.files['file']
     if not file.filename == '':
-        if upload_image(file):
+        if uploads.upload_image(file):
             filename = file.filename.replace(' ', '_')
-            produtos.query.filter_by(id=id).update(
+            produtosModel.produtos.query.filter_by(id=id).update(
                 {"titulo": titulo, "valor_custo": itens_valor[1], "valor_venda": valor_venda, "descricao": descricao, "itens": itens_valor[0], "foto": filename})
         else:
             flash(
                 'Extensão não suportada, a imagem deve ser .png, .jpg, .jpeg ou .webp')
             return redirect('/painel/cardapio')
     else:
-        produtos.query.filter_by(id=id).update(
+        produtosModel.produtos.query.filter_by(id=id).update(
             {"titulo": titulo, "valor_custo": itens_valor[1], "valor_venda": valor_venda, "descricao": descricao, "itens": itens_valor[0]})
     return True
 
 
 def delete_produto(id):
     situacao = "CANCELADO"
-    produtos.query.filter_by(id=id).update(
+    produtosModel.produtos.query.filter_by(id=id).update(
         {"situacao": situacao})
     return True
 
@@ -82,7 +82,7 @@ def add_item():
     valor_custo = request.form['valor_custo']
     valor_venda = request.form['valor_venda']
     situacao = 'ATIVO'
-    item = produtos_itens(titulo=titulo, tipo_item=tipo_item,
+    item = produtosModel.produtos_itens(titulo=titulo, tipo_item=tipo_item,
                           valor_custo=valor_custo, valor_venda=valor_venda, situacao=situacao)
     db.session.add(item)
     return True

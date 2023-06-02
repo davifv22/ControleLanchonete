@@ -7,7 +7,7 @@ def login():
     if request.method == 'POST':
         user = request.form['user']
         senha = request.form['senha']
-        user_query = users.query.filter_by(user=user).first()
+        user_query = usersModel.users.query.filter_by(user=user).first()
 
         if user_query is None:
             #criar mensagem que usur nao existe
@@ -32,11 +32,11 @@ def register():
         senha = request.form['senha']
         situacao = 'ATIVO'
         administrador = 'SIM'
-        dt_criacao = datetime.now()
-        add = users(user=user,nome=nome,email=email,senha=senha,administrador=administrador,situacao=situacao, dt_criacao=dt_criacao)
+        dt_criacao = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        add = usersModel.users(user=user,nome=nome,email=email,senha=senha,administrador=administrador,situacao=situacao, dt_criacao=dt_criacao)
         db.session.add(add)
         db.session.commit()
-        user = users.query.filter_by(user=user).first()
+        user = usersModel.users.query.filter_by(user=user).first()
         login_user(user)
         return redirect('/painel/home')
     return render_template('auth/register.html')
