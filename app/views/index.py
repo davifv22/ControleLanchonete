@@ -9,7 +9,7 @@ def index_():
         nome_cliente = request.form['nome_cliente']
         sub_total = ''
         tipo_entrega = request.form['tipo_entrega']
-        total = request.form['total']
+        total = request.form['sub_total']
         total_itens = ''
         pagamento = request.form['pagamento']
         endereco = request.form['endereco']
