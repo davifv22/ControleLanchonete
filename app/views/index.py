@@ -11,11 +11,12 @@ def index_():
         tipo_entrega = request.form['tipo_entrega']
         total = request.form['sub_total']
         total_itens = ''
+        observacao = request.form['observacao']
         pagamento = request.form['pagamento']
         endereco = request.form['endereco']
         tel = request.form['tel']
         dt_pedido = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-        add = pedidosModel.pedidos(nome_cliente=nome_cliente, sub_total=sub_total, tipo_entrega=tipo_entrega, total=total, total_itens=total_itens,
+        add = pedidosModel.pedidos(nome_cliente=nome_cliente, sub_total=sub_total, tipo_entrega=tipo_entrega, total=total, total_itens=total_itens, observacao=observacao,
                       pagamento=pagamento, endereco=endereco, tel=tel, dt_pedido=dt_pedido, dt_inicio='', dt_concluido='', situacao='PENDENTE')
         db.session.add(add)
         db.session.commit()
